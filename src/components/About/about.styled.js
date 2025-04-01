@@ -7,6 +7,7 @@ export const AboutSection = styled.section`
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   margin: 40px auto 60px;
+  margin-top: 100px;
 `
 
 export const AboutContent = styled.div`

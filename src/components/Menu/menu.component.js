@@ -5,16 +5,18 @@ import { FaUserCircle, FaSuitcase, FaPhoneAlt } from 'react-icons/fa'
 function scrollTo(id) {
   const target = document.getElementById(id)
   if (target) {
-    target.scrollIntoView({ behavior: 'smooth' })
-    // console.log(` Scrolled to #${id} thành công`)
-  } else {
-    // console.warn(` Không tìm thấy phần tử với id: ${id}`)
+    const y = target.getBoundingClientRect().top + window.scrollY
+    const offset = -40
+    window.scrollTo({
+      top: y + offset,
+      behavior: 'smooth',
+    })
   }
 }
 
-function Menu() {
+function Menu({ isSticky }) {
   return (
-    <MenuBar>
+    <MenuBar $sticky={isSticky}>
       <MenuItems>
         <MenuItem onClick={() => scrollTo('about')}>
           <FaUserCircle size={15} style={{ marginRight: '8px' }} />

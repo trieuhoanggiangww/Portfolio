@@ -15,7 +15,7 @@ import {
   CopyIcon,
 } from './about.styled'
 import Avatar from '../../assets/img/avatar.jpg'
-import { FaPhoneAlt, FaEnvelope, FaRegCopy, FaCheck } from 'react-icons/fa'
+import { FaRegCopy, FaCheck } from 'react-icons/fa'
 
 function About() {
   const phone = '0362 110 139'
