@@ -17,6 +17,8 @@ import DemoLogin from '../../assets/demo/epbqlsp/demo1.png'
 import DemoOtp from '../../assets/demo/epbqlsp/DemoOTP.png'
 import DemoHaravan from '../../assets/demo/epbqlsp/DemoHRV1.png'
 import DemoStatus from '../../assets/demo/epbqlsp/demostatus.png'
+import DemoStatus2 from '../../assets/demo/epbqlsp/demostatus2.png'
+import DemoOrderTools from '../../assets/demo/epbqlsp/demoqldh.png'
 
 function Portfolio() {
   const [modalMessage, setModalMessage] = useState('')
@@ -57,7 +59,17 @@ function Portfolio() {
             Hệ thống quản lý đơn hàng, giúp theo dõi trạng thái từ sản xuất đến
             giao vận. Hỗ trợ phân biệt rõ ràng các loại sản phẩm.
           </ProjectDescription>
-          <ProjectTech>React.js · Node.js · MongoDB</ProjectTech>
+          <ProjectTech>
+            <p>
+              <strong>Frontend:</strong> React.js · Styled-components
+              <br />
+              <strong>Backend:</strong> Node.js · Express.js · MongoDB
+              <br />
+              <strong>Xác thực:</strong> Google OAuth · JWT · Speakeasy (OTP)
+              <br />
+              <strong>Tích hợp:</strong> Haravan API · Shopee API · Axios
+            </p>
+          </ProjectTech>
           <ProjectLinks>
             <ProjectLink
               as="button"
@@ -80,11 +92,19 @@ function Portfolio() {
                   'EPEBEN - Quản lí đơn hàng',
                   <>
                     <p>
-                      <strong>EPEBEN</strong> là hệ thống nội bộ giúp quản lý
-                      toàn trình đơn hàng từ sản xuất đến giao vận cho tranh
-                      Mica & Fomex. Dưới đây là danh sách các chức năng tiêu
-                      biểu:
+                      <strong>EPEBEN - Quản Lí Đơn Hàng</strong> là hệ thống nội
+                      bộ giúp quản lý toàn trình đơn hàng từ sản xuất đến giao
+                      vận cho tranh Mica & Fomex. Dưới đây là danh sách các chức
+                      năng tiêu biểu:
                     </p>
+                    <div style={{ textAlign: 'left' }}>
+                      <small style={{ opacity: 0.8, fontStyle: 'italic' }}>
+                        Số lượng người tham gia: 3 người
+                        <br />
+                        Vai trò: Phát triển các chức năng xử lý đơn hàng, đồng
+                        bộ Haravan và in hóa đơn.
+                      </small>
+                    </div>
 
                     {/*  Chức năng 1 */}
                     <div style={{ marginTop: '32px' }}>
@@ -183,6 +203,16 @@ function Portfolio() {
                           boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
                         }}
                       />
+                      <img
+                        src={DemoStatus2}
+                        alt="Cập nhật trạng thái"
+                        style={{
+                          width: '100%',
+                          borderRadius: '12px',
+                          margin: '12px 0',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                        }}
+                      />
 
                       <p>
                         Trạng thái xử lý đơn hàng trong hệ thống được cập nhật
@@ -213,13 +243,72 @@ function Portfolio() {
                         </li>
                         <li>
                           • Mỗi lần trạng thái được cập nhật sẽ lưu lại{' '}
-                          <strong>thời gian</strong> và{' '}
-                          <strong>người thao tác</strong>
+                          <strong>thời gian thao tác</strong>
                         </li>
                       </ul>
 
                       <p>
                         <strong>Stack:</strong> React.js · Node.js · MongoDB
+                      </p>
+                    </div>
+                    {/* 🔍📦🧾 Chức năng 5 */}
+                    <div style={{ marginTop: '32px' }}>
+                      <h4 style={{ color: '#f0a500' }}>
+                        5. Tìm kiếm – Theo dõi trạng thái – In hóa đơn hàng loạt
+                      </h4>
+
+                      <img
+                        src={DemoOrderTools}
+                        alt="Quản lý đơn hàng nâng cao"
+                        style={{
+                          width: '100%',
+                          borderRadius: '12px',
+                          margin: '12px 0',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                        }}
+                      />
+
+                      <p>
+                        Đây là cụm tính năng giúp người dùng xử lý đơn hàng
+                        nhanh và hiệu quả nhất: từ việc tìm đúng đơn, kiểm tra
+                        trạng thái đến in hóa đơn hàng loạt.
+                      </p>
+
+                      <ul style={{ paddingLeft: '20px', lineHeight: 1.6 }}>
+                        <li>
+                          <strong>Tìm kiếm nhanh:</strong> theo mã đơn hàng hoặc
+                          kênh bán hàng (Shopee, Lazada...)
+                        </li>
+                        <li>
+                          <strong>Theo dõi trạng thái:</strong> mỗi đơn hiển
+                          thị:
+                          <ul>
+                            <li>• Trạng thái xử lý: Đã xử lý / Chưa xử lý</li>
+                            <li>
+                              • Chuẩn bị hàng: Chờ lấy hàng / Đang giao hàng /
+                              Đã Giao Hàng / Chưa chuẩn bị hàng
+                            </li>
+                            <li>• Thời gian in gần nhất (nếu đã in hóa đơn)</li>
+                          </ul>
+                        </li>
+                        <li>
+                          <strong>In hóa đơn hàng loạt:</strong>
+                          <ul>
+                            <li>• Chọn nhiều đơn bằng checkbox</li>
+                            <li>
+                              • Nút “In các hóa đơn được chọn” tạo file PDF
+                            </li>
+                            <li>
+                              • Hóa đơn chuẩn SPX Express, có thể in A5 hoặc A4
+                            </li>
+                            <li>• Ghi nhận thời gian & số lần in</li>
+                          </ul>
+                        </li>
+                      </ul>
+
+                      <p>
+                        <strong>Stack:</strong> React.js · Node.js · MongoDB ·
+                        html2pdf / jsPDF
                       </p>
                     </div>
                   </>
