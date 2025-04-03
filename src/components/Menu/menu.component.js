@@ -1,34 +1,22 @@
 import React from 'react'
-import { MenuBar, MenuItem, MenuItems } from './menu.styled'
-import { FaUserCircle, FaSuitcase, FaPhoneAlt } from 'react-icons/fa'
+import { MyName, MenuBar, MenuItems, MenuItem, Hash } from './menu.style'
 
-function scrollTo(id) {
-  const target = document.getElementById(id)
-  if (target) {
-    const y = target.getBoundingClientRect().top + window.scrollY
-    const offset = -40
-    window.scrollTo({
-      top: y + offset,
-      behavior: 'smooth',
-    })
-  }
-}
-
-function Menu({ isSticky }) {
+function Menu() {
   return (
-    <MenuBar $sticky={isSticky}>
+    <MenuBar>
+      <MyName>TRIEU HOANG GIANG</MyName>
       <MenuItems>
-        <MenuItem onClick={() => scrollTo('about')}>
-          <FaUserCircle size={15} style={{ marginRight: '8px' }} />
-          Giới thiệu
+        <MenuItem>
+          <Hash>#</Hash>home
         </MenuItem>
         <MenuItem>
-          <FaSuitcase size={15} style={{ marginRight: '8px' }} />
-          Portfolio
+          <Hash>#</Hash>about-me
         </MenuItem>
         <MenuItem>
-          <FaPhoneAlt size={15} style={{ marginRight: '8px' }} />
-          Liên hệ
+          <Hash>#</Hash>project
+        </MenuItem>
+        <MenuItem>
+          <Hash>#</Hash>contact
         </MenuItem>
       </MenuItems>
     </MenuBar>
