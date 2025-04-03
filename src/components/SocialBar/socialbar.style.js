@@ -11,8 +11,8 @@ export const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  z-index: 100;
+
+  z-index: 1000;
 
   @media (max-width: 768px) {
     display: none;
@@ -21,7 +21,7 @@ export const Sidebar = styled.div`
 
 export const Line = styled.div`
   width: 1px;
-  height: 100px;
+  height: 120px;
   background-color: #5c6370;
   margin-bottom: 10px;
 `
