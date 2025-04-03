@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const AboutMeWrapper = styled.section`
   width: 100%;
   padding: 100px 0;
+  margin-top: 80px;
   background-color: transparent;
 `
 

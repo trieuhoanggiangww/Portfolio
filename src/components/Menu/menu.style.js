@@ -2,14 +2,18 @@ import styled from 'styled-components'
 
 // ------------------------------------MenuBar Wrapper----------------------------------------
 export const MenuBar = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 100px;
   background-color: ${({ theme }) => theme.background};
-  transition: background-color 0.3s ease;
-  position: relative;
-  z-index: 100;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   @media (max-width: 768px) {
     padding: 20px 16px;
@@ -105,7 +109,7 @@ export const MobileMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 32px 24px;
+  padding: 35px 24px;
   z-index: 999;
   transition: transform 0.3s ease;
   transform: ${({ $isOpen }) =>
@@ -118,9 +122,9 @@ export const MobileMenu = styled.div`
 
 export const CloseButton = styled.div`
   position: absolute;
-  top: 20px;
+  top: 25px;
   right: 24px;
-  font-size: 24px;
+  font-size: 30px;
   cursor: pointer;
   color: ${({ theme }) => theme.text};
 `
@@ -136,7 +140,7 @@ export const MobileSocialIcons = styled.div`
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   a {
     color: ${({ theme }) => theme.menuText};
@@ -150,7 +154,7 @@ export const MobileSocialIcons = styled.div`
 
 export const MobileMenuItem = styled.div`
   font-family: 'JetBrains Mono', monospace;
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 500;
   line-height: 1;
   padding: 8px 0;
