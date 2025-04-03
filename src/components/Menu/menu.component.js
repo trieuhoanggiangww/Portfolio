@@ -34,7 +34,7 @@ function Menu({ toggleTheme, isDarkMode }) {
             <Hash>#</Hash>About-me
           </MenuItem>
           <MenuItem>
-            <Hash>#</Hash>Project
+            <Hash>#</Hash>Projects
           </MenuItem>
           <MenuItem>
             <Hash>#</Hash>Contact
@@ -63,7 +63,7 @@ function Menu({ toggleTheme, isDarkMode }) {
             <Hash>#</Hash>About-me
           </MobileMenuItem>
           <MobileMenuItem>
-            <Hash>#</Hash>Project
+            <Hash>#</Hash>Projects
           </MobileMenuItem>
           <MobileMenuItem>
             <Hash>#</Hash>Contact

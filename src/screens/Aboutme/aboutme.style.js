@@ -28,7 +28,7 @@ export const AboutMeText = styled.div`
 
   h2 {
     font-size: 28px;
-    color: #c778dd;
+    color: #fff;
   }
 
   p {
