@@ -3,6 +3,7 @@ import Menu from './components/Menu/menu.component'
 import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 import { ThemeProvider } from 'styled-components'
 import SocialBar from './components/SocialBar/socialbar.component'
+import AboutMe from './screens/Aboutme/aboutme.screen'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -15,6 +16,7 @@ function App() {
         toggleTheme={() => setIsDarkMode((prev) => !prev)}
         isDarkMode={isDarkMode}
       />
+      <AboutMe />
     </ThemeProvider>
   )
 }

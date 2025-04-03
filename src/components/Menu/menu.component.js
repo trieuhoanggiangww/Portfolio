@@ -31,16 +31,13 @@ function Menu({ toggleTheme, isDarkMode }) {
 
         <MenuItems>
           <MenuItem>
-            <Hash>#</Hash>home
+            <Hash>#</Hash>About-me
           </MenuItem>
           <MenuItem>
-            <Hash>#</Hash>about-me
+            <Hash>#</Hash>Project
           </MenuItem>
           <MenuItem>
-            <Hash>#</Hash>project
-          </MenuItem>
-          <MenuItem>
-            <Hash>#</Hash>contact
+            <Hash>#</Hash>Contact
           </MenuItem>
           <ThemeToggle onClick={toggleTheme}>
             {isDarkMode ? <FaSun /> : <FaMoon />}
@@ -63,16 +60,13 @@ function Menu({ toggleTheme, isDarkMode }) {
 
         <MobileMenuItems>
           <MobileMenuItem>
-            <Hash>#</Hash>home
+            <Hash>#</Hash>About-me
           </MobileMenuItem>
           <MobileMenuItem>
-            <Hash>#</Hash>about-me
+            <Hash>#</Hash>Project
           </MobileMenuItem>
           <MobileMenuItem>
-            <Hash>#</Hash>project
-          </MobileMenuItem>
-          <MobileMenuItem>
-            <Hash>#</Hash>contact
+            <Hash>#</Hash>Contact
           </MobileMenuItem>
           <ThemeToggle onClick={toggleTheme}>
             {isDarkMode ? <FaSun /> : <FaMoon />}
