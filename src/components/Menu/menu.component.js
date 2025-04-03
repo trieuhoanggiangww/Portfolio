@@ -48,7 +48,7 @@ function Menu({ toggleTheme, isDarkMode }) {
         </MenuItems>
       </MenuBar>
 
-      <MobileMenu isOpen={showMobileMenu}>
+      <MobileMenu $isOpen={showMobileMenu}>
         <CloseButton onClick={() => setShowMobileMenu(false)}>×</CloseButton>
         <div
           style={{

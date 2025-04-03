@@ -108,7 +108,8 @@ export const MobileMenu = styled.div`
   padding: 32px 24px;
   z-index: 999;
   transition: transform 0.3s ease;
-  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')};
+  transform: ${({ $isOpen }) =>
+    $isOpen ? 'translateX(0)' : 'translateX(100%)'};
 
   @media (min-width: 769px) {
     display: none;
@@ -139,7 +140,7 @@ export const MobileSocialIcons = styled.div`
 
   a {
     color: ${({ theme }) => theme.menuText};
-    font-size: 20px;
+    font-size: 30px;
 
     &:hover {
       color: ${({ theme }) => theme.text};
