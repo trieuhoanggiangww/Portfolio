@@ -1,27 +1,40 @@
 import styled from 'styled-components'
 
-// ------------------------------------Menu----------------------------------------
+// ------------------------------------MenuBar Wrapper----------------------------------------
 export const MenuBar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 200px;
-  background-color: ${({ theme }) => theme.background}; // đồng bộ nền
+  padding: 20px 100px;
+  background-color: ${({ theme }) => theme.background};
   transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
 `
 
-export const MenuItems = styled.div`
-  display: flex;
-  gap: 50px;
-`
-
+// ------------------------------------Logo / Tên----------------------------------------
 export const MyName = styled.div`
   font-family: 'JetBrains Mono', monospace;
   font-weight: 800;
   color: ${({ theme }) => theme.text};
-  font-size: 1.2rem;
+  font-size: 19px;
 `
 
+// ------------------------------------MenuItems (Desktop)----------------------------------------
+export const MenuItems = styled.div`
+  display: flex;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+// ------------------------------------Từng mục menu----------------------------------------
 export const MenuItem = styled.div`
   font-family: 'JetBrains Mono', monospace;
   font-size: 18px;
@@ -38,6 +51,7 @@ export const MenuItem = styled.div`
   }
 `
 
+// ------------------------------------Hash (#)----------------------------------------
 export const Hash = styled.span`
   color: #c778dd;
   margin-right: 2px;
@@ -46,15 +60,108 @@ export const Hash = styled.span`
   line-height: 1;
   vertical-align: middle;
 `
+
+// ------------------------------------Theme Toggle (Sun/Moon)----------------------------------------
 export const ThemeToggle = styled.div`
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.accent};
+  transition: transform 0.2s;
 
   &:hover {
     opacity: 0.8;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+    margin-top: 10px;
   }
 `
-// ------------------------------------Menu----------------------------------------
+
+// ------------------------------------Hamburger Icon (Mobile)----------------------------------------
+export const Hamburger = styled.div`
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+
+// ------------------------------------Mobile Dropdown Menu----------------------------------------
+export const MobileMenu = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.background};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  z-index: 999;
+  transition: transform 0.3s ease;
+  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')};
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`
+
+export const CloseButton = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 24px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
+`
+
+export const MobileMenuItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 0;
+`
+
+export const MobileSocialIcons = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 10px;
+
+  a {
+    color: ${({ theme }) => theme.menuText};
+    font-size: 20px;
+
+    &:hover {
+      color: ${({ theme }) => theme.text};
+    }
+  }
+`
+
+export const MobileMenuItem = styled.div`
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 8px 0;
+  color: ${({ theme }) => theme.menuText};
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.text};
+  }
+
+  &.active {
+    color: ${({ theme }) => theme.text};
+  }
+`

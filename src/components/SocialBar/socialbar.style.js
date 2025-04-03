@@ -13,6 +13,10 @@ export const Sidebar = styled.div`
   align-items: center;
   padding-top: 20px;
   z-index: 100;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const Line = styled.div`
