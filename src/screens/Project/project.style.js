@@ -115,7 +115,7 @@ export const Dots = styled.div`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: ${({ active }) => (active ? '#c778dd' : '#666')};
+  background-color: ${({ $active }) => ($active ? '#c778dd' : '#666')};
   transition: background-color 0.3s;
   cursor: pointer;
 `

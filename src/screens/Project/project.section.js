@@ -67,26 +67,29 @@ const Project = () => {
         <ProjectListWrapper ref={scrollRef}>
           <ProjectCard
             image={Img1}
-            tech="HTML SCSS Python Flask"
-            title="ChertNodes"
-            desc="Minecraft servers hosting"
+            tech="React.js · Node.js · MongoDB "
+            title="EPEBEN - Quản Lí Đơn Hàng"
+            desc="Hệ thống quản lý đơn hàng, giúp theo dõi trạng thái từ sản xuất đến
+            giao vận. Hỗ trợ phân biệt rõ ràng các loại sản phẩm."
             liveLink="https://example.com"
             repoLink="https://github.com/giang/chertnodes"
           />
           <ProjectCard
             image={Img2}
-            tech="React Express Discord.js Node.js"
-            title="ProtectX"
-            desc="Discord anti-crash bot"
+            tech="React.js · Node.js · MongoDB"
+            title="EPEBEN - Quản Lí Sản Phẩm"
+            desc="Hệ thống thu thập và quản lý dữ liệu sản phẩm từ các sàn TMĐT Trung
+            Quốc (Taobao, Tmall, 1688), hỗ trợ xuất/nhập Excel, chỉnh sửa sản
+            phẩm và lưu trữ ảnh trên Google Cloud / Google Drive"
             liveLink="https://protectx.example.com"
             repoLink="https://github.com/giang/protectx"
           />
           <ProjectCard
             image={Img3}
-            tech="CSS Express Node.js"
-            title="Kahoot Answers Viewer"
-            desc="Get answers to your Kahoot quiz"
-            liveLink="https://kahoot.example.com"
+            tech="React.js · Node.js · MongoDB"
+            title="BNS HongMoon Website"
+            desc="Trang web vận hành và quản lý server Blade & Soul HongMoon"
+            liveLink="https://bnshongmoon.com"
             repoLink="https://github.com/giang/kahoot-viewer"
           />
         </ProjectListWrapper>
@@ -95,7 +98,7 @@ const Project = () => {
           {[...Array(totalProjects)].map((_, i) => (
             <Dots
               key={i}
-              active={i === activeIndex}
+              $active={i === activeIndex}
               onClick={() => handleDotClick(i)}
             />
           ))}
