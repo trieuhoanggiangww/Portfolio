@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const MenuBar = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 20px 200px;
+  padding: 20px 180px;
+  background-color: ${({ theme }) => theme.background};
 `
 
 export const MenuItems = styled.div`
@@ -14,7 +15,7 @@ export const MenuItems = styled.div`
 export const MyName = styled.div`
   font-family: 'JetBrains Mono', monospace;
   font-weight: 800;
-  color: #fff;
+  color: ${({ theme }) => theme.text};
   font-size: 1.2rem;
 `
 
@@ -24,10 +25,10 @@ export const MenuItem = styled.div`
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s;
-  color: gray;
+  color: ${({ theme }) => theme.menuText};
 
   &:hover {
-    color: #fff;
+    color: ${({ theme }) => theme.text};
   }
 `
 
@@ -38,4 +39,15 @@ export const Hash = styled.span`
   display: inline-block;
   line-height: 1;
   vertical-align: middle;
+`
+export const ThemeToggle = styled.div`
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.accent};
+
+  &:hover {
+    opacity: 0.8;
+  }
 `

@@ -1,7 +1,15 @@
 import React from 'react'
-import { MyName, MenuBar, MenuItems, MenuItem, Hash } from './menu.style'
+import {
+  MyName,
+  MenuBar,
+  MenuItems,
+  MenuItem,
+  Hash,
+  ThemeToggle,
+} from './menu.style'
+import { FaSun, FaMoon } from 'react-icons/fa'
 
-function Menu() {
+function Menu({ toggleTheme, isDarkMode }) {
   return (
     <MenuBar>
       <MyName>TRIEU HOANG GIANG</MyName>
@@ -18,6 +26,9 @@ function Menu() {
         <MenuItem>
           <Hash>#</Hash>contact
         </MenuItem>
+        <ThemeToggle onClick={toggleTheme}>
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </ThemeToggle>
       </MenuItems>
     </MenuBar>
   )
