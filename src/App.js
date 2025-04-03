@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Menu from './components/Menu/menu.component'
 import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 import { ThemeProvider } from 'styled-components'
+import SocialBar from './components/SocialBar/socialbar.component'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -9,6 +10,7 @@ function App() {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
+      <SocialBar />
       <Menu
         toggleTheme={() => setIsDarkMode((prev) => !prev)}
         isDarkMode={isDarkMode}

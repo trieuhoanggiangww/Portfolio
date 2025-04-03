@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 
+// ------------------------------------Menu----------------------------------------
 export const MenuBar = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 20px 180px;
-  background-color: ${({ theme }) => theme.background};
+  align-items: center;
+  padding: 20px 200px;
+  background-color: ${({ theme }) => theme.background}; // đồng bộ nền
+  transition: background-color 0.3s ease;
 `
 
 export const MenuItems = styled.div`
@@ -24,11 +27,14 @@ export const MenuItem = styled.div`
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.3s, text-decoration 0.3s;
   color: ${({ theme }) => theme.menuText};
+  text-decoration: none;
 
   &:hover {
     color: ${({ theme }) => theme.text};
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 `
 
@@ -51,3 +57,4 @@ export const ThemeToggle = styled.div`
     opacity: 0.8;
   }
 `
+// ------------------------------------Menu----------------------------------------
