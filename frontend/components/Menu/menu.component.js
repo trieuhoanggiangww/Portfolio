@@ -5,13 +5,16 @@ import {
   MenuItems,
   MenuItem,
   Hash,
-  ThemeToggle,
   Hamburger,
   MobileMenu,
   CloseButton,
   MobileMenuItems,
   MobileMenuItem,
   MobileSocialIcons,
+  ThemeToggleContainer,
+  ThemeLabel,
+  ThemeSwitch,
+  SwitchCircle,
 } from './menu.style'
 
 import { FaSun, FaMoon, FaBars, FaGithub, FaFacebookF } from 'react-icons/fa'
@@ -19,6 +22,10 @@ import { SiZalo } from 'react-icons/si'
 
 function Menu({ toggleTheme, isDarkMode }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+
+  const handleThemeToggle = () => {
+    toggleTheme()
+  }
 
   return (
     <>
@@ -39,9 +46,13 @@ function Menu({ toggleTheme, isDarkMode }) {
           <MenuItem>
             <Hash>#</Hash>Contact
           </MenuItem>
-          <ThemeToggle onClick={toggleTheme}>
-            {isDarkMode ? <FaSun /> : <FaMoon />}
-          </ThemeToggle>
+
+          {/* Switch Light/Dark */}
+          <ThemeSwitch onClick={handleThemeToggle}>
+            <SwitchCircle $isDark={isDarkMode}>
+              {isDarkMode ? <FaSun size={10} /> : <FaMoon size={10} />}
+            </SwitchCircle>
+          </ThemeSwitch>
         </MenuItems>
       </MenuBar>
 
@@ -68,9 +79,13 @@ function Menu({ toggleTheme, isDarkMode }) {
           <MobileMenuItem>
             <Hash>#</Hash>Contact
           </MobileMenuItem>
-          <ThemeToggle onClick={toggleTheme}>
-            {isDarkMode ? <FaSun /> : <FaMoon />}
-          </ThemeToggle>
+
+          {/* Mobile Switch Light/Dark */}
+          <ThemeSwitch onClick={handleThemeToggle}>
+            <SwitchCircle $isDark={isDarkMode}>
+              {isDarkMode ? <FaSun size={10} /> : <FaMoon size={10} />}
+            </SwitchCircle>
+          </ThemeSwitch>
         </MobileMenuItems>
 
         <MobileSocialIcons>

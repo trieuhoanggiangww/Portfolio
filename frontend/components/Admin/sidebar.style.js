@@ -66,7 +66,7 @@ export const ThemeToggleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  padding: 0 18px;
+  padding: 0 17px;
   cursor: pointer;
   width: 100%;
 `

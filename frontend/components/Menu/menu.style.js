@@ -85,6 +85,62 @@ export const ThemeToggle = styled.div`
     margin-top: 10px;
   }
 `
+export const ThemeToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+`
+
+export const ThemeLabel = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.text};
+  font-size: 16px;
+  svg {
+    font-size: 20px;
+  }
+`
+
+export const ThemeSwitch = styled.div`
+  width: 50px;
+  height: 24px;
+  background-color: #2e2e4d;
+  border-radius: 50px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+`
+
+export const SwitchCircle = styled.div`
+  width: 18px;
+  height: 18px;
+  background-color: #c778dd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${({ $isDark }) =>
+    $isDark ? 'translateX(24px)' : 'translateX(0)'};
+  transition: transform 0.3s ease;
+
+  svg {
+    font-size: 20px;
+    color: white;
+  }
+`
 
 // ------------------------------------Hamburger Icon (Mobile)----------------------------------------
 export const Hamburger = styled.div`
