@@ -66,7 +66,7 @@ export const ThemeToggleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  padding: 0 17px;
+  padding: 0 18px;
   cursor: pointer;
   width: 100%;
 `
@@ -77,7 +77,7 @@ export const ThemeLabel = styled.div`
   color: #ffffff;
   font-size: 14px;
   font-family: 'JetBrains Mono', monospace;
-  gap: 8px;
+  gap: 10px;
   white-space: nowrap;
 
   svg {
