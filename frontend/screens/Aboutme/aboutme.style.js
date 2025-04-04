@@ -15,6 +15,14 @@ export const AboutMeContainer = styled.div`
   padding: 0 20px;
   gap: 40px;
 
+  @media (max-width: 1240px) and (min-width: 1001px) {
+    max-width: 1000px;
+  }
+
+  @media (max-width: 1000px) and (min-width: 769px) {
+    max-width: 800px;
+  }
+
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 20px;

@@ -16,6 +16,14 @@ export const ProjectSectionContainer = styled.div`
   flex-direction: column;
   gap: 40px;
 
+  @media (max-width: 1240px) and (min-width: 1001px) {
+    max-width: 1000px;
+  }
+
+  @media (max-width: 1000px) and (min-width: 769px) {
+    max-width: 800px;
+  }
+
   @media (max-width: 768px) {
     gap: 20px;
   }
@@ -50,13 +58,13 @@ export const ProjectTitle = styled.h2`
 `
 
 export const ProjectLine = styled.div`
-  width: 600px;
+  width: 50vw;
   height: 1px;
   background-color: #c778dd;
   opacity: 0.6;
 
   @media (max-width: 768px) {
-    width: 150px;
+    width: 20vw;
   }
 `
 
