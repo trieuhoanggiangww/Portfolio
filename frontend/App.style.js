@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 export const lightTheme = {
-  background: '#ffffff',
+  background: '#E5E2E2',
   text: '#000000',
   menuText: '#666666',
   accent: '#C778DD',

@@ -1,104 +1,78 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { loginAdmin } from '../../services/admin.api'
+import {
+  SidebarWrapper,
+  AdminProfile,
+  AdminIcon,
+  AdminName,
+  SidebarMenu,
+  SidebarItemLink,
+  ThemeToggleContainer,
+  ThemeLabel,
+  ThemeToggleWrapper,
+  ToggleCircle,
+} from './sidebar.style'
+import {
+  FaUserCircle,
+  FaHome,
+  FaFolderOpen,
+  FaSignOutAlt,
+  FaMoon,
+  FaSun,
+} from 'react-icons/fa'
 
-const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: ${({ theme }) => theme.background};
-`
+const Sidebar = ({ toggleTheme, isDarkMode }) => {
+  const [dark, setDark] = useState(isDarkMode)
 
-const LoginFormContainer = styled.form`
-  background: ${({ theme }) => theme.cardBackground || '#282c34'};
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 300px;
-`
-
-const Input = styled.input`
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: ${({ theme }) => theme.inputBackground || '#fff'};
-  color: ${({ theme }) => theme.text};
-  font-size: 16px;
-`
-
-const Button = styled.button`
-  padding: 12px;
-  border: none;
-  background-color: #c778dd;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-
-  &:hover {
-    background-color: #b266cc;
-  }
-`
-
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 14px;
-  text-align: center;
-`
-
-const LoginForm = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('') // clear lỗi cũ
-
-    try {
-      const token = await loginAdmin(username, password)
-      console.log('Login thành công, token:', token)
-      // Lưu token vào localStorage để quản lý session
-      localStorage.setItem('adminToken', token)
-      // Chuyển trang sau khi login (ví dụ về dashboard)
-      window.location.href = '/admin/dashboard'
-    } catch (err) {
-      console.error('Lỗi login:', err)
-      setError(err.response?.data?.message || 'Đăng nhập thất bại')
-    }
+  const handleThemeChange = () => {
+    toggleTheme()
+    setDark(!dark)
   }
 
   return (
-    <LoginWrapper>
-      <LoginFormContainer onSubmit={handleSubmit}>
-        <h2 style={{ textAlign: 'center', color: '#c778dd' }}>Admin Login</h2>
+    <SidebarWrapper>
+      {/* Admin Info */}
+      <AdminProfile>
+        <AdminIcon>
+          <FaUserCircle />
+        </AdminIcon>
+        <AdminName>Admin</AdminName>
+      </AdminProfile>
 
-        <Input
-          type="text"
-          placeholder="Tên đăng nhập"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      {/* Menu Items */}
+      <SidebarMenu>
+        <SidebarItemLink to="/admin/dashboard">
+          <FaHome style={{ marginRight: '10px' }} />
+          Dashboard
+        </SidebarItemLink>
 
-        <Input
-          type="password"
-          placeholder="Mật khẩu"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <SidebarItemLink to="/admin/projects">
+          <FaFolderOpen style={{ marginRight: '10px' }} />
+          Project Manager
+        </SidebarItemLink>
+      </SidebarMenu>
 
-        <Button type="submit">Đăng nhập</Button>
+      {/* Dưới cùng */}
+      <div style={{ marginTop: 'auto' }}>
+        <SidebarItemLink to="/admin/logout">
+          <FaSignOutAlt style={{ marginRight: '10px' }} />
+          Logout
+        </SidebarItemLink>
 
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </LoginFormContainer>
-    </LoginWrapper>
+        {/* Toggle Light/Dark Mode */}
+        <ThemeToggleContainer onClick={handleThemeChange}>
+          <ThemeLabel>
+            {dark ? <FaSun /> : <FaMoon />}
+            {dark ? 'Light mode' : 'Dark mode'}
+          </ThemeLabel>
+          <ThemeToggleWrapper>
+            <ToggleCircle $isDark={dark}>
+              {dark ? <FaSun /> : <FaMoon />}
+            </ToggleCircle>
+          </ThemeToggleWrapper>
+        </ThemeToggleContainer>
+      </div>
+    </SidebarWrapper>
   )
 }
 
-export default LoginForm
+export default Sidebar

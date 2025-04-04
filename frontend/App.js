@@ -12,6 +12,10 @@ import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
 
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev)
+  }
+
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
@@ -34,7 +38,12 @@ function App() {
           />
 
           {/* Trang admin */}
-          <Route path="/admin/*" element={<AdminScreen />} />
+          <Route
+            path="/admin/*"
+            element={
+              <AdminScreen isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            }
+          />
         </Routes>
       </Router>
     </ThemeProvider>

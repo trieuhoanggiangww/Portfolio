@@ -36,7 +36,7 @@ export const AboutMeText = styled.div`
 
   h2 {
     font-size: 28px;
-    color: #fff;
+    color: ${({ theme }) => theme.text};
   }
 
   p {

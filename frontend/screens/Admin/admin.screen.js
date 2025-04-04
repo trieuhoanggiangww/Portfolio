@@ -1,7 +1,13 @@
 import React from 'react'
+import Sidebar from '../../components/Admin/sidebar.component'
 
-function AdminScreen() {
-  return <div>AdminScreen</div>
+const AdminScreen = ({ isDarkMode, toggleTheme }) => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <Sidebar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      {/* Phần content admin ở đây */}
+    </div>
+  )
 }
 
 export default AdminScreen
