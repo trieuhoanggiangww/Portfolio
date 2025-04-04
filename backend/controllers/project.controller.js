@@ -2,6 +2,7 @@ const {
   createProject,
   getAllProjects,
   getProjectById,
+  countProjects,
 } = require('../services/project.service')
 
 const createProjectController = async (req, res) => {
@@ -35,8 +36,18 @@ const getProjectByIdController = async (req, res) => {
   }
 }
 
+const countProjectsController = async (req, res) => {
+  try {
+    const count = await countProjects()
+    res.json({ total: count })
+  } catch (error) {
+    console.error('Lỗi đếm project:', error.message)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
 module.exports = {
   createProjectController,
   getAllProjectsController,
   getProjectByIdController,
+  countProjectsController,
 }

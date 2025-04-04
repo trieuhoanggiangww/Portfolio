@@ -38,7 +38,7 @@ const increaseViews = async (ipAddress) => {
   await setting.save()
 
   // Ghi log IP ra file
-  const logPath = path.join(__dirname, '../logs/views.json')
+  const logPath = path.join(__dirname, '../../logs/views.json')
   let logs = []
 
   if (fs.existsSync(logPath)) {

@@ -13,8 +13,13 @@ const getProjectById = async (id) => {
   return await Project.findById(id)
 }
 
+const countProjects = async () => {
+  return await Project.countDocuments()
+}
+
 module.exports = {
   createProject,
   getAllProjects,
   getProjectById,
+  countProjects,
 }
