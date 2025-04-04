@@ -21,7 +21,6 @@ export const DashboardContent = styled.div`
   line-height: 1.6;
 `
 export const Section = styled.div`
-  background-color: ${({ theme }) => theme.menuBackground || '#2e2e4d'};
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);

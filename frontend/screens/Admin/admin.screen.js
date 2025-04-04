@@ -1,16 +1,16 @@
 import React from 'react'
 import Sidebar from '../../components/Admin/sidebar.component'
 import Dashboard from '../../components/Admin/dashboard.component'
+import { AdminContainer, AdminContent } from './admin.style'
 
 const AdminScreen = ({ isDarkMode, toggleTheme }) => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
+    <AdminContainer>
       <Sidebar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-
-      <div style={{ flex: 1 }}>
+      <AdminContent>
         <Dashboard />
-      </div>
-    </div>
+      </AdminContent>
+    </AdminContainer>
   )
 }
 
