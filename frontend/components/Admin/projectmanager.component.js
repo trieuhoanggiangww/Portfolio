@@ -5,9 +5,6 @@ import {
   ProjectManaAddButton,
   ProjectManaForm,
   ProjectManaFormGroup,
-  ProjectManaFormButtonGroup,
-  ProjectManaSaveButton,
-  ProjectManaCancelButton,
   ProjectManaImagePreview,
 } from './projectmanager.style'
 
@@ -174,15 +171,18 @@ const ProjectManager = () => {
             {preview && <ProjectManaImagePreview src={preview} alt="Preview" />}
           </ProjectManaFormGroup>
 
-          <ProjectManaFormButtonGroup>
-            <ProjectManaSaveButton type="submit">Lưu</ProjectManaSaveButton>
-            <ProjectManaCancelButton
-              type="button"
-              onClick={() => setIsAdding(false)}
-            >
-              Hủy
-            </ProjectManaCancelButton>
-          </ProjectManaFormButtonGroup>
+          <Button type="submit" $highlight>
+            {editingProject ? 'Cập nhật' : 'Lưu'}
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              setIsAdding(false)
+              setEditingProject(null)
+            }}
+          >
+            {editingProject ? 'Huỷ chỉnh sửa' : 'Huỷ'}
+          </Button>
         </ProjectManaForm>
       )}
 
