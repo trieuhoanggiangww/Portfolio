@@ -18,6 +18,7 @@ const createProjectController = async (req, res) => {
       repolink,
       startDate,
       endDate,
+      projectType,
     } = req.body
 
     const image = req.file ? `/uploads/${req.file.filename}` : ''
@@ -32,6 +33,7 @@ const createProjectController = async (req, res) => {
       repolink,
       startDate,
       endDate,
+      projectType,
     })
 
     res.status(201).json(newProject)
@@ -85,6 +87,7 @@ const updateProjectController = async (req, res) => {
       repolink,
       startDate,
       endDate,
+      projectType,
     } = req.body
 
     let updatedData = {
@@ -96,6 +99,7 @@ const updateProjectController = async (req, res) => {
       repolink,
       startDate,
       endDate,
+      projectType,
     }
 
     // Giữ ảnh cũ nếu không có file mới

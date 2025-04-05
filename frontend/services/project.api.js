@@ -22,6 +22,7 @@ const projectApi = {
     formData.append('desc', projectData.desc)
     formData.append('content', projectData.content)
     formData.append('tech', projectData.tech)
+    formData.append('projectType', projectData.projectType)
     if (projectData.livelink) formData.append('livelink', projectData.livelink)
     if (projectData.repolink) formData.append('repolink', projectData.repolink)
     if (projectData.startDate)

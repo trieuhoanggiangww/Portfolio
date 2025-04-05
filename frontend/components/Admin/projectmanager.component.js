@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import sanitizeHtml from 'sanitize-html' // Import thư viện sanitize-html
+import sanitizeHtml from 'sanitize-html'
 
 import {
   ProjectManaWrapper,
@@ -35,13 +35,14 @@ const ProjectManager = () => {
   const [formData, setFormData] = useState({
     title: '',
     desc: '',
-    content: '', // Sử dụng content để lưu trữ HTML
+    content: '',
     tech: '',
     image: null,
     livelink: '',
     repolink: '',
     startDate: '',
     endDate: '',
+    projectType: 'minor', // ✅ default type
   })
   const [preview, setPreview] = useState('')
 
@@ -65,6 +66,7 @@ const ProjectManager = () => {
       repolink: '',
       startDate: '',
       endDate: '',
+      projectType: 'minor',
     })
     setPreview('')
     setEditingProject(null)
@@ -82,6 +84,7 @@ const ProjectManager = () => {
       repolink: proj.repolink || '',
       startDate: proj.startDate ? proj.startDate.slice(0, 10) : '',
       endDate: proj.endDate ? proj.endDate.slice(0, 10) : '',
+      projectType: proj.projectType || 'minor',
     })
     setPreview(proj.image ? `${BASE_URL}${proj.image}` : '')
     setEditingProject(proj)
@@ -96,11 +99,8 @@ const ProjectManager = () => {
     }
   }
 
-  // Sử dụng handleInput để cập nhật nội dung trong contenteditable và làm sạch HTML
   const handleInput = (e) => {
     const rawContent = e.target.innerHTML
-
-    // Làm sạch HTML để loại bỏ CSS không mong muốn
     const sanitizedContent = sanitizeHtml(rawContent, {
       allowedTags: [
         'b',
@@ -113,17 +113,13 @@ const ProjectManager = () => {
         'ul',
         'ol',
         'li',
-      ], // Cho phép các thẻ cơ bản như <img> và các thẻ văn bản
+      ],
       allowedAttributes: {
-        a: ['href', 'target'], // Cho phép các thuộc tính của thẻ <a>
-        img: ['src', 'alt'], // Cho phép các thuộc tính của thẻ <img>
+        a: ['href', 'target'],
+        img: ['src', 'alt'],
       },
     })
-
-    setFormData((prev) => ({
-      ...prev,
-      content: sanitizedContent, // Lưu trữ nội dung đã được làm sạch
-    }))
+    setFormData((prev) => ({ ...prev, content: sanitizedContent }))
   }
 
   const handleSubmit = async (e) => {
@@ -132,7 +128,6 @@ const ProjectManager = () => {
     const form = new FormData()
     const original = editingProject || {}
 
-    // Lặp qua các trường trong formData để thêm vào form
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'image') return
       const newVal = typeof value === 'string' ? value.trim() : value
@@ -142,7 +137,6 @@ const ProjectManager = () => {
       }
     })
 
-    // Nếu có ảnh minh họa, thêm vào form
     if (formData.image && typeof formData.image !== 'string') {
       form.append('image', formData.image)
     }
@@ -178,6 +172,7 @@ const ProjectManager = () => {
 
       {isAdding && (
         <ProjectManaForm onSubmit={handleSubmit}>
+          {/* Input thường */}
           {[
             { key: 'title', label: 'Tiêu đề' },
             { key: 'desc', label: 'Mô tả ngắn' },
@@ -199,7 +194,25 @@ const ProjectManager = () => {
             </ProjectManaFormGroup>
           ))}
 
-          {/* Sử dụng contenteditable cho nội dung */}
+          {/* projectType chọn từ dropdown */}
+          <ProjectManaFormGroup>
+            <label>Loại dự án:</label>
+            <select
+              value={formData.projectType}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  projectType: e.target.value,
+                }))
+              }
+            >
+              <option value="major">Dự án lớn</option>
+              <option value="minor">Dự án nhỏ</option>
+              <option value="exercise">Bài tập</option>
+            </select>
+          </ProjectManaFormGroup>
+
+          {/* Nội dung mô tả HTML */}
           <ProjectManaFormGroup>
             <label>Nội dung chi tiết:</label>
             <div
@@ -215,6 +228,7 @@ const ProjectManager = () => {
             />
           </ProjectManaFormGroup>
 
+          {/* Hình ảnh */}
           <ProjectManaFormGroup>
             <label>Ảnh minh họa:</label>
             <input type="file" accept="image/*" onChange={handleFileChange} />
@@ -241,7 +255,15 @@ const ProjectManager = () => {
           {projects.map((proj) => (
             <Card key={proj._id}>
               <Preview src={`${BASE_URL}${proj.image}`} alt={proj.title} />
-              <Stack>{proj.tech}</Stack>
+              <Stack>
+                {proj.tech}
+                <br />{' '}
+                {proj.projectType === 'major'
+                  ? 'Dự án lớn'
+                  : proj.projectType === 'exercise'
+                  ? 'Bài tập'
+                  : 'Dự án nhỏ'}
+              </Stack>
               <div style={{ padding: '20px' }}>
                 <Title>{proj.title}</Title>
                 <Description>{proj.desc}</Description>
@@ -256,6 +278,7 @@ const ProjectManager = () => {
           ))}
         </ProjectListWrapper>
       )}
+
       <ProjectManaAddButtonMobile onClick={handleAddNew}>
         ➕ Thêm mới
       </ProjectManaAddButtonMobile>

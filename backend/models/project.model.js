@@ -11,6 +11,11 @@ const projectSchema = new mongoose.Schema(
     repolink: { type: String },
     startDate: { type: Date },
     endDate: { type: Date },
+    projectType: {
+      type: String,
+      enum: ['major', 'minor', 'exercise'],
+      default: 'minor',
+    },
   },
   { timestamps: true }
 )
