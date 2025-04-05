@@ -45,5 +45,20 @@ const projectApi = {
     const response = await api.get('/countProjects')
     return response.data
   },
+
+  updateProject: async (id, formData) => {
+    const response = await api.put(`/updateProject/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    return response.data
+  },
+
+  // Xóa project
+  deleteProject: async (id) => {
+    const response = await api.delete(`/deleteProject/${id}`)
+    return response.data
+  },
 }
 export default projectApi

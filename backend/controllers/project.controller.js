@@ -3,6 +3,8 @@ const {
   getAllProjects,
   getProjectById,
   countProjects,
+  updateProject,
+  deleteProject,
 } = require('../services/project.service')
 
 const createProjectController = async (req, res) => {
@@ -69,9 +71,79 @@ const countProjectsController = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' })
   }
 }
+
+const updateProjectController = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const {
+      title,
+      desc,
+      content,
+      tech,
+      livelink,
+      repolink,
+      startDate,
+      endDate,
+    } = req.body
+
+    let updatedData = {
+      title,
+      desc,
+      content,
+      tech,
+      livelink,
+      repolink,
+      startDate,
+      endDate,
+    }
+
+    // Giữ ảnh cũ nếu không có file mới
+    if (req.file) {
+      updatedData.image = `/uploads/${req.file.filename}`
+    } else if (req.body.image) {
+      updatedData.image = req.body.image
+    }
+
+    // Lọc bỏ các trường có giá trị undefined
+    Object.keys(updatedData).forEach((key) => {
+      if (updatedData[key] === undefined) {
+        delete updatedData[key]
+      }
+    })
+
+    const updated = await updateProject(id, updatedData)
+
+    if (!updated) {
+      return res.status(404).json({ message: 'Không tìm thấy project' })
+    }
+
+    res.json({ message: 'Cập nhật thành công', project: updated })
+  } catch (error) {
+    console.error('Lỗi cập nhật project:', error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
+
+const deleteProjectController = async (req, res) => {
+  try {
+    const deleted = await deleteProject(req.params.id)
+
+    if (!deleted) {
+      return res.status(404).json({ message: 'Không tìm thấy project' })
+    }
+
+    res.json({ message: 'Xóa project thành công' })
+  } catch (error) {
+    console.error('Lỗi xóa project:', error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
 module.exports = {
   createProjectController,
   getAllProjectsController,
   getProjectByIdController,
   countProjectsController,
+  updateProjectController,
+  deleteProjectController,
 }

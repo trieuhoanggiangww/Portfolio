@@ -17,9 +17,21 @@ const countProjects = async () => {
   return await Project.countDocuments()
 }
 
+// Cập nhật project
+const updateProject = async (id, data) => {
+  return await Project.findByIdAndUpdate(id, data, { new: true })
+}
+
+// Xóa project
+const deleteProject = async (id) => {
+  return await Project.findByIdAndDelete(id)
+}
+
 module.exports = {
   createProject,
   getAllProjects,
   getProjectById,
   countProjects,
+  updateProject,
+  deleteProject,
 }

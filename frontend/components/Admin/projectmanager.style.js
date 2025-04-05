@@ -2,8 +2,11 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 30px;
+  padding: 40px 24px;
   font-family: 'JetBrains Mono', monospace;
+  background-color: ${({ theme }) => theme.background};
+  min-height: 100vh;
+  color: ${({ theme }) => theme.text};
 `
 
 export const Header = styled.div`
@@ -28,18 +31,19 @@ export const AddButton = styled.button`
 `
 
 export const Form = styled.form`
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 `
 
 export const FormGroup = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 
   label {
     font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
+    font-weight: 600;
+    margin-bottom: 8px;
     display: block;
     color: ${({ theme }) => theme.text};
   }
@@ -47,12 +51,18 @@ export const FormGroup = styled.div`
   input,
   textarea {
     width: 100%;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 10px 14px;
+    border-radius: 8px;
     border: 1px solid ${({ theme }) => theme.border || '#ccc'};
     font-size: 14px;
     background-color: ${({ theme }) => theme.input || '#fff'};
     color: #000;
+    transition: 0.3s;
+
+    &:focus {
+      border-color: #c778dd;
+      outline: none;
+    }
   }
 `
 
@@ -89,18 +99,32 @@ export const CancelButton = styled.button`
 
 export const Table = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 
   th,
   td {
-    border: 1px solid ${({ theme }) => theme.border || '#ccc'};
-    padding: 10px;
+    padding: 12px 16px;
     text-align: left;
+    border-bottom: 1px solid ${({ theme }) => theme.border || '#ccc'};
   }
 
   th {
     background-color: ${({ theme }) => theme.accent || '#c778dd'};
     color: white;
+    font-weight: bold;
+  }
+
+  th:first-child,
+  td:first-child {
+    width: 100px;
+  }
+
+  tr:hover {
+    background-color: ${({ theme }) => theme.backgroundLight || '#2e2e4d'};
   }
 
   img {
@@ -138,7 +162,9 @@ export const DeleteButton = styled.button`
 
 export const ImagePreview = styled.img`
   margin-top: 10px;
-  width: 100px;
+  width: 120px;
   height: auto;
   border-radius: 6px;
+  border: 1px solid ${({ theme }) => theme.border};
+  object-fit: cover;
 `

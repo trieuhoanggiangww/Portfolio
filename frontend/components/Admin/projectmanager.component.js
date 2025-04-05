@@ -1,4 +1,3 @@
-// File: projectmanager.component.js
 import React, { useState, useEffect } from 'react'
 import {
   Wrapper,
@@ -16,11 +15,14 @@ import {
 } from './projectmanager.style'
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'
+import { DashboardTitle } from './dashboard.style'
 
 const ProjectManager = () => {
   const [projects, setProjects] = useState([])
   const [isAdding, setIsAdding] = useState(false)
   const [editingProject, setEditingProject] = useState(null)
+  const [initialData, setInitialData] = useState({})
+
   const [formData, setFormData] = useState({
     title: '',
     desc: '',
@@ -40,7 +42,6 @@ const ProjectManager = () => {
 
   const fetchProjects = async () => {
     const res = await projectApi.getAllProjects()
-    console.log(res)
     setProjects(res)
   }
 
@@ -62,6 +63,7 @@ const ProjectManager = () => {
   }
 
   const handleEdit = (proj) => {
+    setInitialData(proj)
     setFormData({
       title: proj.title || '',
       desc: proj.desc || '',
@@ -91,13 +93,23 @@ const ProjectManager = () => {
     e.preventDefault()
 
     const form = new FormData()
-    Object.keys(formData).forEach((key) => {
-      if (formData[key]) form.append(key, formData[key])
+    const original = editingProject || {}
+
+    // So sánh từng field – chỉ append nếu khác với bản gốc
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'image') return // ảnh xử lý riêng
+
+      const newVal = typeof value === 'string' ? value.trim() : value
+      const oldVal = original[key] ?? ''
+
+      if (newVal && newVal !== oldVal) {
+        form.append(key, newVal)
+      }
     })
 
-    // Nếu đang sửa và không chọn ảnh mới thì giữ ảnh cũ
-    if (!formData.image && editingProject?.image) {
-      form.append('image', editingProject.image)
+    // Ảnh chỉ thêm nếu là file mới
+    if (formData.image && typeof formData.image !== 'string') {
+      form.append('image', formData.image)
     }
 
     if (editingProject) {
@@ -121,41 +133,40 @@ const ProjectManager = () => {
   return (
     <Wrapper>
       <Header>
-        <h2>Quản lý Project</h2>
+        <DashboardTitle>Project Manager</DashboardTitle>
         {!isAdding && <AddButton onClick={handleAddNew}>➕ Thêm mới</AddButton>}
       </Header>
 
       {isAdding && (
         <Form onSubmit={handleSubmit}>
           {[
-            'title',
-            'desc',
-            'content',
-            'tech',
-            'livelink',
-            'repolink',
-            'startDate',
-            'endDate',
-          ].map((field) => (
-            <FormGroup key={field}>
-              <label>{field}:</label>
+            { key: 'title', label: 'Tiêu đề' },
+            { key: 'desc', label: 'Mô tả ngắn' },
+            { key: 'content', label: 'Nội dung chi tiết' },
+            { key: 'tech', label: 'Công nghệ sử dụng' },
+            { key: 'livelink', label: 'Link sản phẩm' },
+            { key: 'repolink', label: 'Link mã nguồn' },
+            { key: 'startDate', label: 'Ngày bắt đầu' },
+            { key: 'endDate', label: 'Ngày kết thúc' },
+          ].map(({ key, label }) => (
+            <FormGroup key={key}>
+              <label>{label}:</label>
               <input
-                type={field.includes('Date') ? 'date' : 'text'}
-                value={formData[field] || ''} // tránh undefined/null
+                type={key.includes('Date') ? 'date' : 'text'}
+                value={formData[key] || ''}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, [field]: e.target.value }))
+                  setFormData((prev) => ({ ...prev, [key]: e.target.value }))
                 }
               />
             </FormGroup>
           ))}
 
           <FormGroup>
-            <label>image:</label>
+            <label>Ảnh minh họa:</label>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             {preview && (
               <div>
-                <p>Preview:</p>
-                <img src={preview} alt="Preview" style={{ width: 100 }} />
+                <img src={preview} alt="Preview" style={{ width: 300 }} />
               </div>
             )}
           </FormGroup>
