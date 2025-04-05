@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   MyName,
   MenuBar,
@@ -16,16 +16,30 @@ import {
   ThemeSwitch,
   SwitchCircle,
 } from './menu.style'
+import settingApi from '../../services/setting.api'
 
 import { FaSun, FaMoon, FaBars, FaGithub, FaFacebookF } from 'react-icons/fa'
 import { SiZalo } from 'react-icons/si'
 
 function Menu({ toggleTheme, isDarkMode }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [contactInfo, setContactInfo] = useState(null)
 
   const handleThemeToggle = () => {
     toggleTheme()
   }
+
+  useEffect(() => {
+    const fetchSetting = async () => {
+      try {
+        const data = await settingApi.getSetting()
+        setContactInfo(data.contactInfo)
+      } catch (error) {
+        console.error('Lỗi tải contact info:', error)
+      }
+    }
+    fetchSetting()
+  }, [])
 
   return (
     <>
@@ -89,27 +103,33 @@ function Menu({ toggleTheme, isDarkMode }) {
         </MobileMenuItems>
 
         <MobileSocialIcons>
-          <a
-            href="https://zalo.me/0362110139"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiZalo />
-          </a>
-          <a
-            href="https://www.facebook.com/dungkhumngu/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaFacebookF />
-          </a>
-          <a
-            href="https://github.com/trieuhoanggiangww"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub />
-          </a>
+          {contactInfo?.zalo && (
+            <a
+              href={contactInfo.zalo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SiZalo />
+            </a>
+          )}
+          {contactInfo?.facebook && (
+            <a
+              href={contactInfo.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF />
+            </a>
+          )}
+          {contactInfo?.github && (
+            <a
+              href={contactInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub />
+            </a>
+          )}
         </MobileSocialIcons>
       </MobileMenu>
     </>
