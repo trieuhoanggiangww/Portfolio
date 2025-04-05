@@ -9,4 +9,6 @@ const api = axios.create({
   withCredentials: true, // Nếu cần sử dụng cookie trong các request
 })
 
+export const BASE_URL = 'http://localhost:5000'
+
 export default api

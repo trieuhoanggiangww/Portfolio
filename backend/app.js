@@ -15,6 +15,9 @@ app.use(
   })
 )
 
+// Cho phép truy cập tĩnh thư mục uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
 // Thiết lập các file tĩnh cho frontend
 app.use(express.static(path.join(__dirname, '../dist')))
 

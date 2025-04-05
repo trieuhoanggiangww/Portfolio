@@ -15,7 +15,28 @@ const projectApi = {
 
   // Tạo mới một project
   createProject: async (projectData) => {
-    const response = await api.post('/createProject', projectData)
+    const formData = new FormData()
+
+    // Append text fields
+    formData.append('title', projectData.title)
+    formData.append('desc', projectData.desc)
+    formData.append('content', projectData.content)
+    formData.append('tech', projectData.tech)
+    if (projectData.livelink) formData.append('livelink', projectData.livelink)
+    if (projectData.repolink) formData.append('repolink', projectData.repolink)
+    if (projectData.startDate)
+      formData.append('startDate', projectData.startDate)
+    if (projectData.endDate) formData.append('endDate', projectData.endDate)
+
+    // Append image (file object)
+    formData.append('image', projectData.image)
+
+    const response = await api.post('/createProject', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
     return response.data
   },
 

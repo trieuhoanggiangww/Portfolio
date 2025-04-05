@@ -7,8 +7,32 @@ const {
 
 const createProjectController = async (req, res) => {
   try {
-    const project = await createProject(req.body)
-    res.status(201).json(project)
+    const {
+      title,
+      desc,
+      content,
+      tech,
+      livelink,
+      repolink,
+      startDate,
+      endDate,
+    } = req.body
+
+    const image = req.file ? `/uploads/${req.file.filename}` : ''
+
+    const newProject = await createProject({
+      title,
+      desc,
+      content,
+      tech,
+      image,
+      livelink,
+      repolink,
+      startDate,
+      endDate,
+    })
+
+    res.status(201).json(newProject)
   } catch (error) {
     console.error('Lỗi tạo project:', error)
     res.status(500).json({ message: 'Internal Server Error' })
