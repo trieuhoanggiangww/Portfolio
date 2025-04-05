@@ -33,6 +33,7 @@ export const AboutMeText = styled.div`
   flex: 2;
   font-family: 'JetBrains Mono', monospace;
   color: ${({ theme }) => theme.text};
+  white-space: pre-line;
 
   h2 {
     font-size: 28px;
@@ -43,6 +44,7 @@ export const AboutMeText = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.text};
     line-height: 1.7;
+    margin-bottom: 18px;
   }
 
   .readmore-btn {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   AboutMeWrapper,
   AboutMeContainer,
@@ -8,13 +8,28 @@ import {
 import Avatar from '../../assets/img/avatar1.jpg'
 import { FaArrowRight } from 'react-icons/fa'
 import Quote from './Quote'
+import settingApi from '../../services/setting.api'
 
 function AboutMe() {
   const [showMore, setShowMore] = useState(false)
+  const [aboutMeText, setAboutMeText] = useState('')
 
   const handleContactClick = () => {
     setShowMore(!showMore)
   }
+
+  useEffect(() => {
+    const fetchAboutMe = async () => {
+      try {
+        const settingData = await settingApi.getSetting()
+        setAboutMeText(settingData.aboutMe || '')
+      } catch (error) {
+        console.error('Lỗi lấy About Me:', error)
+      }
+    }
+
+    fetchAboutMe()
+  }, [])
 
   return (
     <>
@@ -26,52 +41,30 @@ function AboutMe() {
               About-me
             </h2>
             <br />
-            <p>
-              Mình là Giang – một Fullstack Developer với kinh nghiệm đã từng
-              tham gia một số dự án từ nhỏ tới vừa, từ lập kế hoạch, phát triển
-              đến triển khai, nên mình hiểu khá rõ cách một sản phẩm hoạt động
-              từ backend đến frontend.
-              <br />
-              <br />
-              Nhưng điều quan trọng nhất mình học được không phải là “làm được
-              mọi thứ”, mà là biết "làm gì cho đúng", và "phối hợp với team để
-              mọi thứ chạy mượt mà".
-              <br />
-              <br />
-              Mình từng làm việc trực tiếp với designer, QA, khách hàng và cũng
-              từng tự xử lý các lỗi production. Vậy nên mình hiểu rằng viết code
-              chỉ là một phần — phần còn lại là giao tiếp, trách nhiệm và tinh
-              thần làm việc cùng nhau.
-              <br />
-              <br />
-              Mình luôn ưu tiên viết code rõ ràng, dễ hiểu và dễ bảo trì — vì
-              mình tin rằng một sản phẩm tốt bắt đầu từ sự chỉn chu trong từng
-              dòng code.
-            </p>
-
-            {/* Phần "Đọc thêm" */}
-            {showMore && (
+            {aboutMeText ? (
               <>
-                <br />
-                <p>
-                  Ngoài công việc, mình rất đam mê học hỏi công nghệ mới và khám
-                  phá những phương pháp phát triển ứng dụng hiệu quả hơn. Mình
-                  luôn tìm cách tối ưu hóa hiệu suất và giúp người dùng có những
-                  trải nghiệm tốt nhất.
-                </p>
-                <p>
-                  Trong tương lai, mình muốn phát triển thêm các kỹ năng liên
-                  quan đến lãnh đạo và quản lý dự án để có thể đóng góp vào các
-                  sản phẩm có tầm ảnh hưởng lớn hơn.
-                </p>
-              </>
-            )}
+                {showMore ? (
+                  // Hiển thị toàn bộ AboutMeText, tách dòng theo \n
+                  aboutMeText
+                    .split('\n\n')
+                    .map((paragraph, index) => <p key={index}>{paragraph}</p>)
+                ) : (
+                  // Hiển thị 500 ký tự đầu tiên
+                  <p>
+                    {aboutMeText.slice(0, 500)}
+                    {aboutMeText.length > 500 ? '...' : ''}
+                  </p>
+                )}
 
-            {/* Nút "Đọc thêm" */}
-            <button className="readmore-btn" onClick={handleContactClick}>
-              {showMore ? 'Thu gọn' : 'Đọc thêm'}{' '}
-              <FaArrowRight style={{ marginLeft: '10px' }} />
-            </button>
+                {/* Nút đọc thêm / thu gọn */}
+                <button className="readmore-btn" onClick={handleContactClick}>
+                  {showMore ? 'Thu gọn' : 'Đọc thêm'}
+                  <FaArrowRight style={{ marginLeft: '10px' }} />
+                </button>
+              </>
+            ) : (
+              <p>Đang tải nội dung...</p>
+            )}
           </AboutMeText>
 
           <AboutMeImage>
