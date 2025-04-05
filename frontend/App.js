@@ -13,14 +13,29 @@ import settingApi from './services/setting.api'
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
 
+  // Đọc trạng thái theme từ localStorage khi mở app
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme === 'light') {
+      setIsDarkMode(false)
+    } else {
+      setIsDarkMode(true)
+    }
+  }, [])
+
+  // Toggle theme và lưu vào localStorage
   const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev)
+    setIsDarkMode((prev) => {
+      const newMode = !prev
+      localStorage.setItem('theme', newMode ? 'dark' : 'light')
+      return newMode
+    })
   }
 
+  // Ghi lượt xem (chỉ ghi 1 lần mỗi 1 tiếng)
   useEffect(() => {
     const lastView = localStorage.getItem('lastViewed')
 
-    // Nếu chưa từng lưu hoặc lưu cách đây > 1 tiếng (3600 giây)
     if (!lastView || Date.now() - parseInt(lastView) > 3600 * 1000) {
       settingApi
         .increaseViews()
