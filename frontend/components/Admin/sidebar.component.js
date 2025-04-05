@@ -10,6 +10,9 @@ import {
   ThemeLabel,
   ThemeToggleWrapper,
   ToggleCircle,
+  HamburgerButton,
+  SidebarOverlay,
+  SideTitle,
 } from './sidebar.style'
 import {
   FaUserCircle,
@@ -18,60 +21,86 @@ import {
   FaSignOutAlt,
   FaMoon,
   FaSun,
+  FaBars,
 } from 'react-icons/fa'
+import { useLocation } from 'react-router-dom'
 
 const Sidebar = ({ toggleTheme, isDarkMode }) => {
   const [dark, setDark] = useState(isDarkMode)
+  const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+
+  const getPageTitle = () => {
+    if (location.pathname.includes('dashboard')) return 'Dashboard'
+    if (location.pathname.includes('projects')) return 'Project Manager'
+    if (location.pathname.includes('logout')) return 'Logout'
+    return ''
+  }
 
   const handleThemeChange = () => {
     toggleTheme()
     setDark(!dark)
   }
 
+  const handleToggleSidebar = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
-    <SidebarWrapper>
-      {/* Admin Info */}
-      <AdminProfile>
-        <AdminIcon>
-          <FaUserCircle />
-        </AdminIcon>
-        <AdminName>Admin</AdminName>
-      </AdminProfile>
+    <>
+      {/* Hamburger cho Mobile */}
+      <HamburgerButton onClick={handleToggleSidebar} $isOpen={isOpen}>
+        <FaBars />
+        <SideTitle>{getPageTitle()}</SideTitle>
+      </HamburgerButton>
 
-      {/* Menu Items */}
-      <SidebarMenu>
-        <SidebarItemLink to="/admin/dashboard">
-          <FaHome style={{ marginRight: '10px' }} />
-          Dashboard
-        </SidebarItemLink>
+      {/* SidebarOverlay khi Sidebar mở */}
+      {isOpen && <SidebarOverlay onClick={handleToggleSidebar} />}
 
-        <SidebarItemLink to="/admin/projects">
-          <FaFolderOpen style={{ marginRight: '10px' }} />
-          Project Manager
-        </SidebarItemLink>
-      </SidebarMenu>
+      {/* Sidebar */}
+      <SidebarWrapper $isOpen={isOpen}>
+        {/* Admin Info */}
+        <AdminProfile>
+          <AdminIcon>
+            <FaUserCircle />
+          </AdminIcon>
+          <AdminName>Admin</AdminName>
+        </AdminProfile>
 
-      {/* Dưới cùng */}
-      <div style={{ marginTop: 'auto' }}>
-        <SidebarItemLink to="/admin/logout">
-          <FaSignOutAlt style={{ marginRight: '10px' }} />
-          Logout
-        </SidebarItemLink>
+        {/* Menu Items */}
+        <SidebarMenu>
+          <SidebarItemLink to="/admin/dashboard" onClick={handleToggleSidebar}>
+            <FaHome style={{ marginRight: '10px' }} />
+            Dashboard
+          </SidebarItemLink>
 
-        {/* Toggle Light/Dark Mode */}
-        <ThemeToggleContainer onClick={handleThemeChange}>
-          <ThemeLabel>
-            {dark ? <FaSun /> : <FaMoon />}
-            {dark ? 'Light mode' : 'Dark mode'}
-          </ThemeLabel>
-          <ThemeToggleWrapper>
-            <ToggleCircle $isDark={dark}>
+          <SidebarItemLink to="/admin/projects" onClick={handleToggleSidebar}>
+            <FaFolderOpen style={{ marginRight: '10px' }} />
+            Project Manager
+          </SidebarItemLink>
+        </SidebarMenu>
+
+        {/* Dưới cùng */}
+        <div style={{ marginTop: 'auto' }}>
+          <SidebarItemLink to="/admin/logout" onClick={handleToggleSidebar}>
+            <FaSignOutAlt style={{ marginRight: '10px' }} />
+            Logout
+          </SidebarItemLink>
+
+          <ThemeToggleContainer onClick={handleThemeChange}>
+            <ThemeLabel>
               {dark ? <FaSun /> : <FaMoon />}
-            </ToggleCircle>
-          </ThemeToggleWrapper>
-        </ThemeToggleContainer>
-      </div>
-    </SidebarWrapper>
+              {dark ? 'Light mode' : 'Dark mode'}
+            </ThemeLabel>
+            <ThemeToggleWrapper>
+              <ToggleCircle $isDark={dark}>
+                {dark ? <FaSun /> : <FaMoon />}
+              </ToggleCircle>
+            </ThemeToggleWrapper>
+          </ThemeToggleContainer>
+        </div>
+      </SidebarWrapper>
+    </>
   )
 }
 
