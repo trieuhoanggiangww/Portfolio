@@ -119,7 +119,7 @@ const Dashboard = () => {
             {/* --- About Me --- */}
             <Section>
               <SectionHeader>
-                <h3>📝 Giới thiệu (About Me)</h3>
+                <h3>📝 Giới thiệu</h3>
               </SectionHeader>
               <AboutTextarea
                 value={aboutMeInput}
@@ -133,70 +133,43 @@ const Dashboard = () => {
             <Section>
               <SectionHeader>
                 <h3>📞 Thông tin liên hệ</h3>
-                <EditButton
-                  onClick={() => setIsEditingContact((prev) => !prev)}
-                >
-                  {isEditingContact ? 'Huỷ' : 'Chỉnh sửa'}
-                </EditButton>
               </SectionHeader>
 
-              {isEditingContact ? (
-                <form onSubmit={handleUpdateContact}>
-                  {['email', 'phone', 'zalo', 'facebook', 'github'].map(
-                    (field) => (
-                      <div
-                        key={field}
-                        className="form-group"
+              <form onSubmit={handleUpdateContact}>
+                {['email', 'phone', 'zalo', 'facebook', 'github'].map(
+                  (field) => (
+                    <div
+                      key={field}
+                      className="form-group"
+                      style={{
+                        marginBottom: '12px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <label style={{ marginBottom: '4px', fontSize: '14px' }}>
+                        {field.charAt(0).toUpperCase() + field.slice(1)}:
+                      </label>
+                      <input
+                        type="text"
+                        value={contactForm[field] || ''}
+                        onChange={(e) =>
+                          handleInputChange(field, e.target.value)
+                        }
                         style={{
-                          marginBottom: '12px',
-                          display: 'flex',
-                          flexDirection: 'column',
+                          padding: '10px',
+                          borderRadius: '6px',
+                          border: '1px solid #ccc',
+                          fontSize: '14px',
                         }}
-                      >
-                        <label style={{ marginBottom: '4px' }}>
-                          {field.charAt(0).toUpperCase() + field.slice(1)}:
-                        </label>
-                        <input
-                          type="text"
-                          value={contactForm[field] || ''}
-                          onChange={(e) =>
-                            handleInputChange(field, e.target.value)
-                          }
-                          style={{
-                            padding: '8px',
-                            borderRadius: '5px',
-                            border: '1px solid #ccc',
-                          }}
-                        />
-                      </div>
-                    )
-                  )}
-                  <SaveButton type="submit">Cập nhật</SaveButton>
-                </form>
-              ) : (
-                <ul>
-                  <li>
-                    <strong>Email:</strong>{' '}
-                    {setting.contactInfo?.email || 'Chưa có'}
-                  </li>
-                  <li>
-                    <strong>Phone:</strong>{' '}
-                    {setting.contactInfo?.phone || 'Chưa có'}
-                  </li>
-                  <li>
-                    <strong>Zalo:</strong>{' '}
-                    {setting.contactInfo?.zalo || 'Chưa có'}
-                  </li>
-                  <li>
-                    <strong>Facebook:</strong>{' '}
-                    {setting.contactInfo?.facebook || 'Chưa có'}
-                  </li>
-                  <li>
-                    <strong>Github:</strong>{' '}
-                    {setting.contactInfo?.github || 'Chưa có'}
-                  </li>
-                </ul>
-              )}
+                      />
+                    </div>
+                  )
+                )}
+
+                {/* Nút Cập nhật bên dưới */}
+                <SaveButton type="submit">Cập nhật</SaveButton>
+              </form>
             </Section>
           </>
         ) : (

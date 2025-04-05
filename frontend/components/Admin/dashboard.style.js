@@ -6,6 +6,13 @@ export const DashboardWrapper = styled.div`
   color: ${({ theme }) => theme.text};
   background-color: ${({ theme }) => theme.background};
   min-height: 100vh;
+
+  @media (max-width: 768px) {
+    margin-top: 60px;
+    padding: 20px 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 `
 
 export const DashboardTitle = styled.h1`
@@ -13,6 +20,10 @@ export const DashboardTitle = styled.h1`
   font-size: 28px;
   margin-bottom: 20px;
   color: ${({ theme }) => theme.accent};
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const DashboardContent = styled.div`
@@ -32,12 +43,25 @@ export const Section = styled.div`
     li {
       margin: 8px 0;
       font-size: 16px;
+      word-break: break-word;
+
+      strong {
+        display: inline-block;
+        min-width: 90px;
+      }
     }
   }
 
   p {
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
   }
 `
 
@@ -46,10 +70,15 @@ export const SectionHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  margin-top: 30px;
 
   h3 {
     font-size: 22px;
     color: ${({ theme }) => theme.text};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
   }
 `
 
@@ -74,6 +103,7 @@ export const StatSection = styled.div`
   gap: 20px;
   margin-bottom: 40px;
   flex-wrap: wrap;
+  justify-content: center;
 `
 
 export const StatBox = styled.div`
@@ -97,6 +127,12 @@ export const StatBox = styled.div`
     margin-top: 6px;
     color: #c778dd;
   }
+  @media (max-width: 768px) {
+    flex: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 `
 
 export const IconWrapper = styled.div`
@@ -107,7 +143,7 @@ export const IconWrapper = styled.div`
 `
 export const AboutTextarea = styled.textarea`
   width: 100%;
-  min-height: 200px;
+  min-height: 400px;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
   border: 1px solid #c778dd;
@@ -122,6 +158,10 @@ export const AboutTextarea = styled.textarea`
     outline: none;
     border-color: #c778dd;
     background-color: ${({ theme }) => theme.background};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 20px;
   }
 `
 
@@ -139,5 +179,11 @@ export const SaveButton = styled.button`
 
   &:hover {
     background-color: #a45fc1;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 0;
+    text-align: center;
   }
 `
