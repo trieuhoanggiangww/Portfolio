@@ -76,7 +76,7 @@ const Project = () => {
         </ProjectHeader>
 
         <ProjectListWrapper ref={scrollRef}>
-          {projects.map((project, index) => (
+          {projects.slice(0, 3).map((project, index) => (
             <ProjectCard
               key={project._id || index}
               image={`${BASE_URL}${project.image}`}
@@ -85,12 +85,13 @@ const Project = () => {
               desc={project.desc}
               liveLink={project.livelink}
               repoLink={project.repolink}
+              detailLink={`/projects/${project._id}`}
             />
           ))}
         </ProjectListWrapper>
 
         <CarouselDots>
-          {[...Array(projects.length)].map((_, i) => (
+          {[...Array(Math.min(projects.length, 3))].map((_, i) => (
             <Dots
               key={i}
               $active={i === activeIndex}
