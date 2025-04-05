@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import {
-  Wrapper,
-  Header,
-  AddButton,
-  Form,
-  FormGroup,
-  ButtonGroup,
-  SaveButton,
-  CancelButton,
-  Table,
-  ActionButton,
-  DeleteButton,
-  ImagePreview,
+  ProjectManaWrapper,
+  ProjectManaHeader,
+  ProjectManaAddButton,
+  ProjectManaForm,
+  ProjectManaFormGroup,
+  ProjectManaFormButtonGroup,
+  ProjectManaSaveButton,
+  ProjectManaCancelButton,
+  ProjectManaImagePreview,
 } from './projectmanager.style'
+
+import { ProjectListWrapper } from '../../screens/Project/project.style' // giữ layout
+
+import {
+  Card,
+  Preview,
+  Stack,
+  Title,
+  Description,
+  ButtonGroup,
+  Button,
+} from '../../screens/Project/projectcard.style' // bộ card UI mới
+
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'
 import { DashboardTitle } from './dashboard.style'
@@ -21,7 +31,6 @@ const ProjectManager = () => {
   const [projects, setProjects] = useState([])
   const [isAdding, setIsAdding] = useState(false)
   const [editingProject, setEditingProject] = useState(null)
-  const [initialData, setInitialData] = useState({})
 
   const [formData, setFormData] = useState({
     title: '',
@@ -63,7 +72,6 @@ const ProjectManager = () => {
   }
 
   const handleEdit = (proj) => {
-    setInitialData(proj)
     setFormData({
       title: proj.title || '',
       desc: proj.desc || '',
@@ -75,7 +83,6 @@ const ProjectManager = () => {
       startDate: proj.startDate ? proj.startDate.slice(0, 10) : '',
       endDate: proj.endDate ? proj.endDate.slice(0, 10) : '',
     })
-
     setPreview(proj.image ? `${BASE_URL}${proj.image}` : '')
     setEditingProject(proj)
     setIsAdding(true)
@@ -95,19 +102,15 @@ const ProjectManager = () => {
     const form = new FormData()
     const original = editingProject || {}
 
-    // So sánh từng field – chỉ append nếu khác với bản gốc
     Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'image') return // ảnh xử lý riêng
-
+      if (key === 'image') return
       const newVal = typeof value === 'string' ? value.trim() : value
       const oldVal = original[key] ?? ''
-
       if (newVal && newVal !== oldVal) {
         form.append(key, newVal)
       }
     })
 
-    // Ảnh chỉ thêm nếu là file mới
     if (formData.image && typeof formData.image !== 'string') {
       form.append('image', formData.image)
     }
@@ -131,14 +134,18 @@ const ProjectManager = () => {
   }
 
   return (
-    <Wrapper>
-      <Header>
+    <ProjectManaWrapper>
+      <ProjectManaHeader>
         <DashboardTitle>Project Manager</DashboardTitle>
-        {!isAdding && <AddButton onClick={handleAddNew}>➕ Thêm mới</AddButton>}
-      </Header>
+        {!isAdding && (
+          <ProjectManaAddButton onClick={handleAddNew}>
+            ➕ Thêm mới
+          </ProjectManaAddButton>
+        )}
+      </ProjectManaHeader>
 
       {isAdding && (
-        <Form onSubmit={handleSubmit}>
+        <ProjectManaForm onSubmit={handleSubmit}>
           {[
             { key: 'title', label: 'Tiêu đề' },
             { key: 'desc', label: 'Mô tả ngắn' },
@@ -149,7 +156,7 @@ const ProjectManager = () => {
             { key: 'startDate', label: 'Ngày bắt đầu' },
             { key: 'endDate', label: 'Ngày kết thúc' },
           ].map(({ key, label }) => (
-            <FormGroup key={key}>
+            <ProjectManaFormGroup key={key}>
               <label>{label}:</label>
               <input
                 type={key.includes('Date') ? 'date' : 'text'}
@@ -158,72 +165,48 @@ const ProjectManager = () => {
                   setFormData((prev) => ({ ...prev, [key]: e.target.value }))
                 }
               />
-            </FormGroup>
+            </ProjectManaFormGroup>
           ))}
 
-          <FormGroup>
+          <ProjectManaFormGroup>
             <label>Ảnh minh họa:</label>
             <input type="file" accept="image/*" onChange={handleFileChange} />
-            {preview && (
-              <div>
-                <img src={preview} alt="Preview" style={{ width: 300 }} />
-              </div>
-            )}
-          </FormGroup>
+            {preview && <ProjectManaImagePreview src={preview} alt="Preview" />}
+          </ProjectManaFormGroup>
 
-          <ButtonGroup>
-            <SaveButton type="submit">Lưu</SaveButton>
-            <CancelButton type="button" onClick={() => setIsAdding(false)}>
+          <ProjectManaFormButtonGroup>
+            <ProjectManaSaveButton type="submit">Lưu</ProjectManaSaveButton>
+            <ProjectManaCancelButton
+              type="button"
+              onClick={() => setIsAdding(false)}
+            >
               Hủy
-            </CancelButton>
-          </ButtonGroup>
-        </Form>
+            </ProjectManaCancelButton>
+          </ProjectManaFormButtonGroup>
+        </ProjectManaForm>
       )}
 
       {!isAdding && (
-        <Table>
-          <thead>
-            <tr>
-              <th>Ảnh</th>
-              <th>Tiêu đề</th>
-              <th>Công nghệ</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((proj) => (
-              <tr key={proj._id}>
-                <td>
-                  {proj.image && (
-                    <img
-                      src={`${BASE_URL}${proj.image}`}
-                      alt={proj.title}
-                      style={{
-                        width: '80px',
-                        height: '60px',
-                        objectFit: 'cover',
-                        borderRadius: '6px',
-                      }}
-                    />
-                  )}
-                </td>
-
-                <td>{proj.title}</td>
-                <td>{proj.tech}</td>
-                <td>
-                  <ActionButton onClick={() => handleEdit(proj)}>
+        <ProjectListWrapper>
+          {projects.map((proj) => (
+            <Card key={proj._id}>
+              <Preview src={`${BASE_URL}${proj.image}`} alt={proj.title} />
+              <Stack>{proj.tech}</Stack>
+              <div style={{ padding: '20px' }}>
+                <Title>{proj.title}</Title>
+                <Description>{proj.desc}</Description>
+                <ButtonGroup>
+                  <Button $highlight onClick={() => handleEdit(proj)}>
                     Sửa
-                  </ActionButton>
-                  <DeleteButton onClick={() => handleDelete(proj._id)}>
-                    Xóa
-                  </DeleteButton>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                  </Button>
+                  <Button onClick={() => handleDelete(proj._id)}>Xóa</Button>
+                </ButtonGroup>
+              </div>
+            </Card>
+          ))}
+        </ProjectListWrapper>
       )}
-    </Wrapper>
+    </ProjectManaWrapper>
   )
 }
 

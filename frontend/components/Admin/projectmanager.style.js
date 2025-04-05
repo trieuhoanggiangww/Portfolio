@@ -1,7 +1,6 @@
-// File: projectmanager.style.js
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+export const ProjectManaWrapper = styled.div`
   padding: 40px 24px;
   font-family: 'JetBrains Mono', monospace;
   background-color: ${({ theme }) => theme.background};
@@ -9,14 +8,14 @@ export const Wrapper = styled.div`
   color: ${({ theme }) => theme.text};
 `
 
-export const Header = styled.div`
+export const ProjectManaHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 `
 
-export const AddButton = styled.button`
+export const ProjectManaAddButton = styled.button`
   background-color: #c778dd;
   color: white;
   padding: 8px 14px;
@@ -30,21 +29,32 @@ export const AddButton = styled.button`
   }
 `
 
-export const Form = styled.form`
-  padding: 30px;
+export const ProjectManaForm = styled.form`
+  padding: 32px;
   border-radius: 12px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 48px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid ${({ theme }) => theme.border || '#444'};
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  transition: all 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding: 24px 16px;
+  }
 `
 
-export const FormGroup = styled.div`
-  margin-bottom: 20px;
+export const ProjectManaFormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   label {
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 8px;
-    display: block;
     color: ${({ theme }) => theme.text};
   }
 
@@ -53,9 +63,8 @@ export const FormGroup = styled.div`
     width: 100%;
     padding: 10px 14px;
     border-radius: 8px;
-    border: 1px solid ${({ theme }) => theme.border || '#ccc'};
+    border: 1px solid ${({ theme }) => theme.border || '#666'};
     font-size: 14px;
-    background-color: ${({ theme }) => theme.input || '#fff'};
     color: #000;
     transition: 0.3s;
 
@@ -64,14 +73,25 @@ export const FormGroup = styled.div`
       outline: none;
     }
   }
+
+  textarea {
+    resize: vertical;
+    min-height: 180px; /* 🎯 to hơn mặc định */
+    max-height: 500px;
+    line-height: 1.6;
+    font-size: 15px;
+  }
 `
 
-export const ButtonGroup = styled.div`
+export const ProjectManaFormButtonGroup = styled.div`
   display: flex;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 `
 
-export const SaveButton = styled.button`
+export const ProjectManaSaveButton = styled.button`
   background-color: #4caf50;
   color: white;
   padding: 8px 16px;
@@ -84,7 +104,7 @@ export const SaveButton = styled.button`
   }
 `
 
-export const CancelButton = styled.button`
+export const ProjectManaCancelButton = styled.button`
   background-color: #e74c3c;
   color: white;
   padding: 8px 16px;
@@ -97,7 +117,8 @@ export const CancelButton = styled.button`
   }
 `
 
-export const Table = styled.table`
+// Bảng cũ (nếu dùng fallback bảng)
+export const ProjectManaTable = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -133,7 +154,8 @@ export const Table = styled.table`
   }
 `
 
-export const ActionButton = styled.button`
+// Các nút cơ bản
+export const ProjectManaActionButton = styled.button`
   background-color: #2196f3;
   color: white;
   padding: 6px 12px;
@@ -147,24 +169,84 @@ export const ActionButton = styled.button`
   }
 `
 
-export const DeleteButton = styled.button`
-  background-color: #f44336;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #d32f2f;
-  }
-`
-
-export const ImagePreview = styled.img`
+export const ProjectManaImagePreview = styled.img`
   margin-top: 10px;
   width: 120px;
   height: auto;
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.border};
   object-fit: cover;
+`
+
+// ---- CARD UI ----
+
+export const ProjectManaCardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+`
+
+export const ProjectManaCard = styled.div`
+  width: 300px;
+  background-color: ${({ theme }) => theme.background};
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+`
+
+export const ProjectManaImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+`
+
+export const ProjectManaContent = styled.div`
+  padding: 20px;
+`
+
+export const ProjectManaTitle = styled.h3`
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  color: ${({ theme }) => theme.text};
+  margin: 0;
+`
+
+export const ProjectManaTech = styled.p`
+  font-size: 14px;
+  color: ${({ theme }) => theme.text};
+  margin-bottom: 10px;
+`
+
+export const ProjectManaDescription = styled.p`
+  font-size: 14px;
+  color: ${({ theme }) => theme.textLight || '#999'};
+  margin-bottom: 20px;
+`
+
+export const ProjectManaCardButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+`
+
+export const ProjectManaCardEditButton = styled(ProjectManaActionButton)`
+  background-color: #ffa500;
+
+  &:hover {
+    background-color: #ff8c00;
+  }
+`
+
+export const ProjectManaCardDeleteButton = styled(ProjectManaActionButton)`
+  background-color: #f44336;
+
+  &:hover {
+    background-color: #e53935;
+  }
 `

@@ -22,7 +22,7 @@ export const Card = styled.div`
 export const Preview = styled.img`
   width: 100%;
   height: 180px;
-  object-fit: cover;
+  object-fit: contain;
   border-bottom: 1px solid #5c6370;
 `
 
