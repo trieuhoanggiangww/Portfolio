@@ -12,17 +12,15 @@ import {
   CarouselDots,
   Dots,
 } from './project.style'
-
 import { FaArrowRightLong } from 'react-icons/fa6'
 import ProjectCard from './ProjectCard'
-import Img1 from '../../assets/img/avatar.jpg'
-import Img2 from '../../assets/img/avatar.jpg'
-import Img3 from '../../assets/img/avatar.jpg'
+import projectApi from '../../services/project.api'
+import { BASE_URL } from '../../services/api'
 
 const Project = () => {
   const scrollRef = useRef()
   const [activeIndex, setActiveIndex] = useState(0)
-  const totalProjects = 3
+  const [projects, setProjects] = useState([])
 
   const handleScroll = () => {
     const scrollLeft = scrollRef.current.scrollLeft
@@ -30,6 +28,19 @@ const Project = () => {
     const index = Math.round(scrollLeft / (width * 0.8))
     setActiveIndex(index)
   }
+
+  const fetchProjects = async () => {
+    try {
+      const data = await projectApi.getAllProjects()
+      setProjects(data)
+    } catch (error) {
+      console.error('Failed to fetch projects:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
 
   useEffect(() => {
     const ref = scrollRef.current
@@ -65,37 +76,21 @@ const Project = () => {
         </ProjectHeader>
 
         <ProjectListWrapper ref={scrollRef}>
-          <ProjectCard
-            image={Img1}
-            tech="React.js · Node.js · MongoDB "
-            title="EPEBEN - Quản Lí Đơn Hàng"
-            desc="Hệ thống quản lý đơn hàng, giúp theo dõi trạng thái từ sản xuất đến
-            giao vận. Hỗ trợ phân biệt rõ ràng các loại sản phẩm."
-            liveLink="https://example.com"
-            repoLink="https://github.com/giang/chertnodes"
-          />
-          <ProjectCard
-            image={Img2}
-            tech="React.js · Node.js · MongoDB"
-            title="EPEBEN - Quản Lí Sản Phẩm"
-            desc="Hệ thống thu thập và quản lý dữ liệu sản phẩm từ các sàn TMĐT Trung
-            Quốc (Taobao, Tmall, 1688), hỗ trợ xuất/nhập Excel, chỉnh sửa sản
-            phẩm và lưu trữ ảnh trên Google Cloud / Google Drive"
-            liveLink="https://protectx.example.com"
-            repoLink="https://github.com/giang/protectx"
-          />
-          <ProjectCard
-            image={Img3}
-            tech="React.js · Node.js · MongoDB"
-            title="BNS HongMoon Website"
-            desc="Trang web vận hành và quản lý server Blade & Soul HongMoon"
-            liveLink="https://bnshongmoon.com"
-            repoLink="https://github.com/giang/kahoot-viewer"
-          />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project._id || index}
+              image={`${BASE_URL}${project.image}`}
+              tech={project.tech}
+              title={project.title}
+              desc={project.desc}
+              liveLink={project.livelink}
+              repoLink={project.repolink}
+            />
+          ))}
         </ProjectListWrapper>
 
         <CarouselDots>
-          {[...Array(totalProjects)].map((_, i) => (
+          {[...Array(projects.length)].map((_, i) => (
             <Dots
               key={i}
               $active={i === activeIndex}
