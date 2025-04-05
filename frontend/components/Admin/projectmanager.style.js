@@ -6,6 +6,10 @@ export const ProjectManaWrapper = styled.div`
   background-color: ${({ theme }) => theme.background};
   min-height: 100vh;
   color: ${({ theme }) => theme.text};
+
+  @media (max-width: 768px) {
+    padding: 24px 16px;
+  }
 `
 
 export const ProjectManaHeader = styled.div`
@@ -13,6 +17,12 @@ export const ProjectManaHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
 `
 
 export const ProjectManaAddButton = styled.button`
@@ -26,6 +36,20 @@ export const ProjectManaAddButton = styled.button`
 
   &:hover {
     background-color: #a65fbd;
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+`
+export const ProjectManaAddButtonMobile = styled(ProjectManaAddButton)`
+  display: none;
+  margin: 24px auto 0;
+  width: 90%;
+  max-width: 360px;
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `
 
@@ -76,7 +100,7 @@ export const ProjectManaFormGroup = styled.div`
 
   textarea {
     resize: vertical;
-    min-height: 180px;
+    min-height: 260px;
     max-height: 500px;
     line-height: 1.6;
     font-size: 15px;

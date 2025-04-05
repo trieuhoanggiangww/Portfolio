@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import sanitizeHtml from 'sanitize-html' // Import thư viện sanitize-html
+
 import {
   ProjectManaWrapper,
   ProjectManaHeader,
@@ -6,9 +8,10 @@ import {
   ProjectManaForm,
   ProjectManaFormGroup,
   ProjectManaImagePreview,
+  ProjectManaAddButtonMobile,
 } from './projectmanager.style'
 
-import { ProjectListWrapper } from '../../screens/Project/project.style' // giữ layout
+import { ProjectListWrapper } from '../../screens/Project/project.style'
 
 import {
   Card,
@@ -18,7 +21,7 @@ import {
   Description,
   ButtonGroup,
   Button,
-} from '../../screens/Project/projectcard.style' // bộ card UI mới
+} from '../../screens/Project/projectcard.style'
 
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'
@@ -32,7 +35,7 @@ const ProjectManager = () => {
   const [formData, setFormData] = useState({
     title: '',
     desc: '',
-    content: '',
+    content: '', // Sử dụng content để lưu trữ HTML
     tech: '',
     image: null,
     livelink: '',
@@ -93,12 +96,43 @@ const ProjectManager = () => {
     }
   }
 
+  // Sử dụng handleInput để cập nhật nội dung trong contenteditable và làm sạch HTML
+  const handleInput = (e) => {
+    const rawContent = e.target.innerHTML
+
+    // Làm sạch HTML để loại bỏ CSS không mong muốn
+    const sanitizedContent = sanitizeHtml(rawContent, {
+      allowedTags: [
+        'b',
+        'i',
+        'em',
+        'strong',
+        'a',
+        'img',
+        'p',
+        'ul',
+        'ol',
+        'li',
+      ], // Cho phép các thẻ cơ bản như <img> và các thẻ văn bản
+      allowedAttributes: {
+        a: ['href', 'target'], // Cho phép các thuộc tính của thẻ <a>
+        img: ['src', 'alt'], // Cho phép các thuộc tính của thẻ <img>
+      },
+    })
+
+    setFormData((prev) => ({
+      ...prev,
+      content: sanitizedContent, // Lưu trữ nội dung đã được làm sạch
+    }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const form = new FormData()
     const original = editingProject || {}
 
+    // Lặp qua các trường trong formData để thêm vào form
     Object.entries(formData).forEach(([key, value]) => {
       if (key === 'image') return
       const newVal = typeof value === 'string' ? value.trim() : value
@@ -108,6 +142,7 @@ const ProjectManager = () => {
       }
     })
 
+    // Nếu có ảnh minh họa, thêm vào form
     if (formData.image && typeof formData.image !== 'string') {
       form.append('image', formData.image)
     }
@@ -146,7 +181,6 @@ const ProjectManager = () => {
           {[
             { key: 'title', label: 'Tiêu đề' },
             { key: 'desc', label: 'Mô tả ngắn' },
-            { key: 'content', label: 'Nội dung chi tiết' },
             { key: 'tech', label: 'Công nghệ sử dụng' },
             { key: 'livelink', label: 'Link sản phẩm' },
             { key: 'repolink', label: 'Link mã nguồn' },
@@ -164,6 +198,22 @@ const ProjectManager = () => {
               />
             </ProjectManaFormGroup>
           ))}
+
+          {/* Sử dụng contenteditable cho nội dung */}
+          <ProjectManaFormGroup>
+            <label>Nội dung chi tiết:</label>
+            <div
+              contentEditable
+              onInput={handleInput}
+              dangerouslySetInnerHTML={{ __html: formData.content }}
+              style={{
+                border: '1px solid #ccc',
+                padding: '10px',
+                minHeight: '200px',
+                overflowY: 'auto',
+              }}
+            />
+          </ProjectManaFormGroup>
 
           <ProjectManaFormGroup>
             <label>Ảnh minh họa:</label>
@@ -206,6 +256,9 @@ const ProjectManager = () => {
           ))}
         </ProjectListWrapper>
       )}
+      <ProjectManaAddButtonMobile onClick={handleAddNew}>
+        ➕ Thêm mới
+      </ProjectManaAddButtonMobile>
     </ProjectManaWrapper>
   )
 }
