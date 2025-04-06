@@ -217,6 +217,7 @@ export const MobileMenuItem = styled.div`
   color: ${({ theme }) => theme.menuText};
   cursor: pointer;
   transition: color 0.2s ease;
+  text-decoration: none;
 
   &:hover {
     color: ${({ theme }) => theme.text};

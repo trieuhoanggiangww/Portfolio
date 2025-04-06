@@ -41,6 +41,8 @@ export const ProjectHeaderLeft = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
+  flex-wrap: nowrap;
+  min-width: 0;
 `
 
 export const ProjectHash = styled.span`
@@ -54,16 +56,27 @@ export const ProjectTitle = styled.h2`
   font-size: 28px;
   color: ${({ theme }) => theme.text};
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `
 
 export const ProjectLine = styled.div`
-  width: 50vw;
+  flex: 1;
   height: 1px;
   background-color: #c778dd;
   opacity: 0.6;
+  margin-left: 20px;
+  margin-right: 20px;
 
   @media (max-width: 768px) {
+    flex: 1;
     width: 20vw;
+    margin-left: 10px;
   }
 `
 
