@@ -66,6 +66,14 @@ function Menu({ toggleTheme, isDarkMode }) {
           <MenuItem onClick={() => handleScrollToSection('contact')}>
             <Hash>#</Hash>Contact
           </MenuItem>
+          <MenuItem
+            as="a"
+            href="https://github.com/trieuhoanggiangww/Portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Hash>#</Hash>Source-code
+          </MenuItem>
 
           {/* Switch Light/Dark */}
           <ThemeSwitch onClick={handleThemeToggle}>
@@ -122,6 +130,16 @@ function Menu({ toggleTheme, isDarkMode }) {
             }}
           >
             <Hash>#</Hash>Contact
+          </MobileMenuItem>
+
+          <MobileMenuItem
+            as="a"
+            href="https://github.com/trieuhoanggiangww/Portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setShowMobileMenu(false)}
+          >
+            <Hash>#</Hash>Source-code
           </MobileMenuItem>
 
           {/* Mobile Switch Light/Dark */}
