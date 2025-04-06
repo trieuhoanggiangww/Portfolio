@@ -7,8 +7,8 @@ const projectSchema = new mongoose.Schema(
     content: { type: String, required: true },
     tech: { type: String, required: true },
     image: { type: String, required: true },
-    livelink: { type: String },
-    repolink: { type: String },
+    livelink: { type: String, default: null },
+    repolink: { type: String, default: null },
     startDate: { type: Date },
     endDate: { type: Date },
     projectType: {

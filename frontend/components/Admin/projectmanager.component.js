@@ -132,7 +132,8 @@ const ProjectManager = () => {
       if (key === 'image') return
       const newVal = typeof value === 'string' ? value.trim() : value
       const oldVal = original[key] ?? ''
-      if (newVal && newVal !== oldVal) {
+      // Cho phép gửi cả chuỗi rỗng nếu khác với dữ liệu cũ
+      if (newVal !== oldVal) {
         form.append(key, newVal)
       }
     })

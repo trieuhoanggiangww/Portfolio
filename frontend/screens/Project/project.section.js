@@ -32,7 +32,10 @@ const Project = () => {
   const fetchProjects = async () => {
     try {
       const data = await projectApi.getAllProjects()
-      setProjects(data)
+      const majorProjects = data.filter(
+        (project) => project.projectType === 'major'
+      )
+      setProjects(majorProjects)
     } catch (error) {
       console.error('Failed to fetch projects:', error)
     }
