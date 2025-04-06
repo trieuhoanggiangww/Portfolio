@@ -14,24 +14,19 @@ import {
   ThemeSwitch,
   SwitchCircle,
 } from './menu.style'
-import settingApi from '../../services/setting.api'
-
 import { FaSun, FaMoon, FaBars, FaGithub, FaFacebookF } from 'react-icons/fa'
 import { SiZalo } from 'react-icons/si'
+import settingApi from '../../services/setting.api'
+import { useScrollToSection } from '../../hooks/useScrollToSection'
 
 function Menu({ toggleTheme, isDarkMode }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [contactInfo, setContactInfo] = useState(null)
 
+  const handleScrollToSection = useScrollToSection()
+
   const handleThemeToggle = () => {
     toggleTheme()
-  }
-
-  const handleScrollTo = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
   }
 
   useEffect(() => {
@@ -52,7 +47,7 @@ function Menu({ toggleTheme, isDarkMode }) {
       <MenuBar>
         <MyName
           style={{ cursor: 'pointer' }}
-          onClick={() => (window.location.href = '/')}
+          onClick={() => handleScrollToSection('')}
         >
           TRIEU HOANG GIANG
         </MyName>
@@ -62,13 +57,13 @@ function Menu({ toggleTheme, isDarkMode }) {
         </Hamburger>
 
         <MenuItems>
-          <MenuItem onClick={() => handleScrollTo('about-me')}>
+          <MenuItem onClick={() => handleScrollToSection('about-me')}>
             <Hash>#</Hash>About-me
           </MenuItem>
-          <MenuItem onClick={() => handleScrollTo('projects')}>
+          <MenuItem onClick={() => handleScrollToSection('projects')}>
             <Hash>#</Hash>Projects
           </MenuItem>
-          <MenuItem onClick={() => handleScrollTo('contact')}>
+          <MenuItem onClick={() => handleScrollToSection('contact')}>
             <Hash>#</Hash>Contact
           </MenuItem>
 
@@ -91,14 +86,22 @@ function Menu({ toggleTheme, isDarkMode }) {
             padding: '10px 20px',
           }}
         >
-          <MyName style={{ fontSize: '1.1rem' }}>TRIEU HOANG GIANG</MyName>
+          <MyName
+            style={{ fontSize: '1.1rem', cursor: 'pointer' }}
+            onClick={() => {
+              handleScrollToSection('')
+              setShowMobileMenu(false)
+            }}
+          >
+            TRIEU HOANG GIANG
+          </MyName>
           <CloseButton onClick={() => setShowMobileMenu(false)}>×</CloseButton>
         </div>
 
         <MobileMenuItems>
           <MobileMenuItem
             onClick={() => {
-              handleScrollTo('about-me')
+              handleScrollToSection('about-me')
               setShowMobileMenu(false)
             }}
           >
@@ -106,7 +109,7 @@ function Menu({ toggleTheme, isDarkMode }) {
           </MobileMenuItem>
           <MobileMenuItem
             onClick={() => {
-              handleScrollTo('projects')
+              handleScrollToSection('projects')
               setShowMobileMenu(false)
             }}
           >
@@ -114,7 +117,7 @@ function Menu({ toggleTheme, isDarkMode }) {
           </MobileMenuItem>
           <MobileMenuItem
             onClick={() => {
-              handleScrollTo('contact')
+              handleScrollToSection('contact')
               setShowMobileMenu(false)
             }}
           >
