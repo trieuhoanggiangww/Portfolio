@@ -9,6 +9,11 @@ import Avatar from '../../assets/img/avatar1.jpg'
 import { FaArrowRight } from 'react-icons/fa'
 import Quote from './Quote'
 import settingApi from '../../services/setting.api'
+import {
+  ProjectHash,
+  ProjectTitle,
+  ProjectHeaderLeft,
+} from '../Project/project.style'
 
 function AboutMe() {
   const [showMore, setShowMore] = useState(false)
@@ -36,10 +41,10 @@ function AboutMe() {
       <AboutMeWrapper id="about-me">
         <AboutMeContainer>
           <AboutMeText>
-            <h2>
-              <span style={{ color: '#c778dd', marginRight: '8px' }}>#</span>
-              About-me
-            </h2>
+            <ProjectHeaderLeft>
+              <ProjectHash>#</ProjectHash>
+              <ProjectTitle>About-me</ProjectTitle>
+            </ProjectHeaderLeft>
             <br />
             {aboutMeText ? (
               <>

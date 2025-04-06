@@ -40,7 +40,6 @@ export const ProjectHeader = styled.div`
 export const ProjectHeaderLeft = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
   flex: 1;
 `
 

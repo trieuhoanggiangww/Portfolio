@@ -11,8 +11,6 @@ import {
   MobileMenuItems,
   MobileMenuItem,
   MobileSocialIcons,
-  ThemeToggleContainer,
-  ThemeLabel,
   ThemeSwitch,
   SwitchCircle,
 } from './menu.style'
@@ -29,6 +27,13 @@ function Menu({ toggleTheme, isDarkMode }) {
     toggleTheme()
   }
 
+  const handleScrollTo = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   useEffect(() => {
     const fetchSetting = async () => {
       try {
@@ -43,21 +48,27 @@ function Menu({ toggleTheme, isDarkMode }) {
 
   return (
     <>
+      {/* --- Desktop Menu --- */}
       <MenuBar>
-        <MyName>TRIEU HOANG GIANG</MyName>
+        <MyName
+          style={{ cursor: 'pointer' }}
+          onClick={() => (window.location.href = '/')}
+        >
+          TRIEU HOANG GIANG
+        </MyName>
 
         <Hamburger onClick={() => setShowMobileMenu(true)}>
           <FaBars />
         </Hamburger>
 
         <MenuItems>
-          <MenuItem>
+          <MenuItem onClick={() => handleScrollTo('about-me')}>
             <Hash>#</Hash>About-me
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={() => handleScrollTo('projects')}>
             <Hash>#</Hash>Projects
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={() => handleScrollTo('contact')}>
             <Hash>#</Hash>Contact
           </MenuItem>
 
@@ -70,13 +81,14 @@ function Menu({ toggleTheme, isDarkMode }) {
         </MenuItems>
       </MenuBar>
 
+      {/* --- Mobile Menu --- */}
       <MobileMenu $isOpen={showMobileMenu}>
-        <CloseButton onClick={() => setShowMobileMenu(false)}>×</CloseButton>
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            padding: '10px 20px',
           }}
         >
           <MyName style={{ fontSize: '1.1rem' }}>TRIEU HOANG GIANG</MyName>
@@ -84,13 +96,28 @@ function Menu({ toggleTheme, isDarkMode }) {
         </div>
 
         <MobileMenuItems>
-          <MobileMenuItem>
+          <MobileMenuItem
+            onClick={() => {
+              handleScrollTo('about-me')
+              setShowMobileMenu(false)
+            }}
+          >
             <Hash>#</Hash>About-me
           </MobileMenuItem>
-          <MobileMenuItem>
+          <MobileMenuItem
+            onClick={() => {
+              handleScrollTo('projects')
+              setShowMobileMenu(false)
+            }}
+          >
             <Hash>#</Hash>Projects
           </MobileMenuItem>
-          <MobileMenuItem>
+          <MobileMenuItem
+            onClick={() => {
+              handleScrollTo('contact')
+              setShowMobileMenu(false)
+            }}
+          >
             <Hash>#</Hash>Contact
           </MobileMenuItem>
 
