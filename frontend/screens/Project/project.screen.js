@@ -23,7 +23,7 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
     try {
       const data = await projectApi.getAllProjects()
 
-      // ✅ Phân loại dự án
+      // Phân loại dự án
       const major = data.filter((project) => project.projectType === 'major')
       const minor = data.filter((project) => project.projectType === 'minor')
 
@@ -105,6 +105,7 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
                   liveLink={project.livelink}
                   repoLink={project.repolink}
                   detailLink={`/projects/${project._id}`}
+                  hideImage={true}
                 />
               ))
             ) : (

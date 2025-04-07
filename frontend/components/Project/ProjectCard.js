@@ -17,6 +17,7 @@ const ProjectCard = ({
   liveLink,
   repoLink,
   detailLink,
+  hideImage = false,
 }) => {
   const buttons = []
 
@@ -49,7 +50,6 @@ const ProjectCard = ({
     )
   }
 
-  // "Chi tiết" luôn có
   buttons.push(
     <Button
       key="detail"
@@ -64,7 +64,7 @@ const ProjectCard = ({
 
   return (
     <Card>
-      <Preview src={image} alt={title} />
+      {!hideImage && <Preview src={image} alt={title} />}
       <Stack>{tech}</Stack>
       <div style={{ padding: '20px' }}>
         <Title>{title}</Title>
