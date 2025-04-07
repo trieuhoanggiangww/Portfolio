@@ -23,7 +23,7 @@ export const SkillsRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-end;
 
   @media (max-width: 768px) {
     justify-content: center;

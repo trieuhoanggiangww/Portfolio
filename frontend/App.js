@@ -12,6 +12,7 @@ import settingApi from './services/setting.api'
 import ProjectScreen from './screens/Project/project.screen'
 import ProjectDetail from './components/Project/projectdetail.component'
 import SkillSection from './screens/Skills/skills.section'
+import ContactSection from './screens/Contact/contact.section'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -64,6 +65,7 @@ function App() {
                 <AboutMe />
                 <Project />
                 <SkillSection />
+                <ContactSection />
               </>
             }
           />
