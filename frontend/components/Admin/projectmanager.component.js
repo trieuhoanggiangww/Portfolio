@@ -42,7 +42,7 @@ const ProjectManager = () => {
     repolink: '',
     startDate: '',
     endDate: '',
-    projectType: 'minor', // ✅ default type
+    projectType: 'minor',
   })
   const [preview, setPreview] = useState('')
 
@@ -188,13 +188,13 @@ const ProjectManager = () => {
             { key: 'tech', label: 'Công nghệ sử dụng' },
             { key: 'livelink', label: 'Link sản phẩm' },
             { key: 'repolink', label: 'Link mã nguồn' },
-            { key: 'startDate', label: 'Ngày bắt đầu' },
-            { key: 'endDate', label: 'Ngày kết thúc' },
+            { key: 'startDate', label: 'Tháng bắt đầu' },
+            { key: 'endDate', label: 'Tháng kết thúc' },
           ].map(({ key, label }) => (
             <ProjectManaFormGroup key={key}>
               <label>{label}:</label>
               <input
-                type={key.includes('Date') ? 'date' : 'text'}
+                type="text"
                 value={formData[key] || ''}
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, [key]: e.target.value }))

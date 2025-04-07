@@ -9,8 +9,8 @@ const projectSchema = new mongoose.Schema(
     image: { type: String, required: true },
     livelink: { type: String, default: null },
     repolink: { type: String, default: null },
-    startDate: { type: Date },
-    endDate: { type: Date },
+    startDate: { type: String },
+    endDate: { type: String },
     projectType: {
       type: String,
       enum: ['major', 'minor', 'exercise'],

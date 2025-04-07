@@ -12,6 +12,7 @@ import {
   DetailButton,
 } from './projectdetail.style'
 import Menu from '../Menu/menu.component'
+import Footer from '../Footer/footer.component'
 
 const ProjectDetail = ({ toggleTheme, isDarkMode }) => {
   const { id } = useParams()
@@ -75,6 +76,7 @@ const ProjectDetail = ({ toggleTheme, isDarkMode }) => {
           />
         </DetailContainer>
       </DetailWrapper>
+      <Footer />
     </>
   )
 }
