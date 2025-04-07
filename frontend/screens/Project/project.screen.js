@@ -13,7 +13,7 @@ import ProjectCard from '../../components/Project/ProjectCard'
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'
 import Menu from '../../components/Menu/menu.component'
-import { AboutMeText } from '../../components/Aboutme/aboutme.style'
+import Footer from '../../components/Footer/footer.component'
 
 const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
   const [majorProjects, setMajorProjects] = useState([])
@@ -114,6 +114,7 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
           </ProjectListWrapper>
         </ProjectSectionContainer>
       </ProjectSectionWrapper>
+      <Footer />
     </>
   )
 }
