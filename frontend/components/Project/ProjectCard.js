@@ -7,6 +7,7 @@ import {
   Description,
   ButtonGroup,
   Button,
+  StyledDate,
 } from './projectcard.style'
 
 const ProjectCard = ({
@@ -17,6 +18,8 @@ const ProjectCard = ({
   liveLink,
   repoLink,
   detailLink,
+  startDate,
+  endDate,
   hideImage = false,
 }) => {
   const buttons = []
@@ -68,6 +71,16 @@ const ProjectCard = ({
       <Stack>{tech}</Stack>
       <div style={{ padding: '20px' }}>
         <Title>{title}</Title>
+
+        {/* ✨ Hiển thị startDate - endDate dưới title */}
+        {(startDate || endDate) && (
+          <StyledDate>
+            {startDate && <span>{startDate}</span>}
+            {startDate && endDate && <span> - </span>}
+            {endDate && <span>{endDate}</span>}
+          </StyledDate>
+        )}
+
         <Description>{desc}</Description>
 
         <ButtonGroup>{buttons}</ButtonGroup>

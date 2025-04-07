@@ -30,6 +30,7 @@ const LoginScreen = ({ setIsAuthenticated }) => {
 
       if (res.data && res.data.success) {
         localStorage.setItem('adminToken', res.data.token)
+        localStorage.setItem('adminUsername', formData.username)
         setIsAuthenticated(true)
         navigate('/admin')
       } else {

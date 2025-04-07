@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   SidebarWrapper,
   AdminProfile,
@@ -28,6 +28,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const Sidebar = ({ toggleTheme, isDarkMode }) => {
   const [dark, setDark] = useState(isDarkMode)
   const [isOpen, setIsOpen] = useState(false)
+  const [username, setUsername] = useState('Admin')
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -42,6 +43,13 @@ const Sidebar = ({ toggleTheme, isDarkMode }) => {
     toggleTheme()
     setDark(!dark)
   }
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('adminUsername')
+    if (storedUsername) {
+      setUsername(storedUsername)
+    }
+  }, [])
 
   const handleToggleSidebar = () => {
     setIsOpen(!isOpen)
@@ -70,7 +78,7 @@ const Sidebar = ({ toggleTheme, isDarkMode }) => {
           <AdminIcon>
             <FaUserCircle />
           </AdminIcon>
-          <AdminName>Admin</AdminName>
+          <AdminName>{username}</AdminName>
         </AdminProfile>
 
         {/* Menu Items */}

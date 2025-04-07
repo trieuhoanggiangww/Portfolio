@@ -266,7 +266,7 @@ const ProjectManager = () => {
               <Preview src={`${BASE_URL}${proj.image}`} alt={proj.title} />
               <Stack>
                 {proj.tech}
-                <br />{' '}
+                <br />
                 {proj.projectType === 'major'
                   ? 'Dự án lớn'
                   : proj.projectType === 'exercise'
@@ -275,7 +275,20 @@ const ProjectManager = () => {
               </Stack>
               <div style={{ padding: '20px' }}>
                 <Title>{proj.title}</Title>
+
+                {/* Thêm startDate-endDate ở đây */}
+                {(proj.startDate || proj.endDate) && (
+                  <div
+                    style={{ fontSize: '14px', color: '#777', margin: '8px 0' }}
+                  >
+                    {proj.startDate && <span>{proj.startDate}</span>}
+                    {proj.startDate && proj.endDate && <span> - </span>}
+                    {proj.endDate && <span>{proj.endDate}</span>}
+                  </div>
+                )}
+
                 <Description>{proj.desc}</Description>
+
                 <ButtonGroup>
                   <Button $highlight onClick={() => handleEdit(proj)}>
                     Sửa

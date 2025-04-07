@@ -71,3 +71,8 @@ export const Button = styled.button`
       $highlight ? '#c778dd20' : '#ffffff10'};
   }
 `
+export const StyledDate = styled.div`
+  font-size: 14px;
+  color: #777;
+  margin: 8px 0;
+`

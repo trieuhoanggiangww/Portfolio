@@ -73,6 +73,8 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
                   image={`${BASE_URL}${project.image}`}
                   tech={project.tech}
                   title={project.title}
+                  startDate={project.startDate}
+                  endDate={project.endDate}
                   desc={project.desc}
                   liveLink={project.livelink}
                   repoLink={project.repolink}
@@ -101,6 +103,8 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
                   image={`${BASE_URL}${project.image}`}
                   tech={project.tech}
                   title={project.title}
+                  startDate={project.startDate}
+                  endDate={project.endDate}
                   desc={project.desc}
                   liveLink={project.livelink}
                   repoLink={project.repolink}
