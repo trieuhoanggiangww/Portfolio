@@ -20,6 +20,8 @@ export const lightTheme = {
   text: '#000000',
   menuText: '#666666',
   accent: '#C778DD',
+  accentTransparent: '#00000055',
+  accentBorder: '#00000099',
 }
 
 export const darkTheme = {
@@ -27,4 +29,6 @@ export const darkTheme = {
   text: '#ffffff',
   menuText: '#888888',
   accent: '#C778DD',
+  accentTransparent: '#c778dd55',
+  accentBorder: '#c778dd99',
 }

@@ -14,6 +14,7 @@ import ProjectDetail from './components/Project/projectdetail.component'
 import SkillSection from './screens/Skills/skills.section'
 import ContactSection from './components/Contact/contact.section'
 import Footer from './components/Footer/footer.component'
+import BackgroundAnimation from './components/Animation/animation.component'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -54,6 +55,7 @@ function App() {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
+      <BackgroundAnimation />
       <Router>
         <Routes>
           {/* Trang chính portfolio */}
