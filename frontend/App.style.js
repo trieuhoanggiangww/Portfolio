@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 export const lightTheme = {
+  mode: 'light',
   background: '#E5E2E2',
   text: '#000000',
   menuText: '#666666',
@@ -25,6 +26,7 @@ export const lightTheme = {
 }
 
 export const darkTheme = {
+  mode: 'dark',
   background: '#282C33',
   text: '#ffffff',
   menuText: '#888888',

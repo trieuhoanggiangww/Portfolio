@@ -27,10 +27,12 @@ const BackgroundWrapper = styled.div`
 const Particle = styled.div`
   position: absolute;
   top: 100%;
-  width: ${({ size }) => size || 6}px;
-  height: ${({ size }) => size || 6}px;
-  background: ${({ theme }) => (theme.mode === 'light' ? '#111' : '#c778dd')};
-  opacity: 0.6;
+  width: ${({ size }) => size || 30}px;
+  height: ${({ size }) => size || 30}px;
+  background: transparent;
+  border: 1px solid
+    ${({ theme }) => (theme.mode === 'light' ? '#111' : '#ffffff88')};
+  opacity: 0.7;
   animation: ${floatSquare} linear infinite;
   transform-origin: center;
 `
@@ -41,7 +43,7 @@ const BackgroundAnimation = () => {
   return (
     <BackgroundWrapper>
       {particles.map((_, index) => {
-        const size = Math.random() * 6 + 4
+        const size = Math.random() * 10 + 10
         return (
           <Particle
             key={index}

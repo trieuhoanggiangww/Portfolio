@@ -13,7 +13,7 @@ import {
   ProjectTitle,
   ProjectLine,
   ProjectHeaderLeft,
-} from '../Project/project.style'
+} from '../../screens/Project/project.style'
 
 const SkillSection = () => {
   return (
