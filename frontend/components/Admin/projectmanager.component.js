@@ -21,7 +21,7 @@ import {
   Description,
   ButtonGroup,
   Button,
-} from '../../screens/Project/projectcard.style'
+} from '../Project/projectcard.style'
 
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'

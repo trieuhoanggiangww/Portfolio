@@ -11,7 +11,7 @@ import {
   ProjectListWrapper,
   CarouselDots,
   Dots,
-} from './project.style'
+} from '../../screens/Project/project.style'
 import { FaArrowRightLong } from 'react-icons/fa6'
 import ProjectCard from './ProjectCard'
 import projectApi from '../../services/project.api'

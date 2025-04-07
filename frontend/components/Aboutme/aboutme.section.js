@@ -13,7 +13,7 @@ import {
   ProjectHash,
   ProjectTitle,
   ProjectHeaderLeft,
-} from '../Project/project.style'
+} from '../../screens/Project/project.style'
 
 function AboutMe() {
   const [showMore, setShowMore] = useState(false)

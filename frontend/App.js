@@ -4,15 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Menu from './components/Menu/menu.component'
 import SocialBar from './components/SocialBar/socialbar.component'
-import AboutMe from './screens/Aboutme/aboutme.section'
-import Project from './screens/Project/project.section'
+import AboutMe from './components/Aboutme/aboutme.section'
+import Project from './components/Project/project.section'
 import AdminScreen from './screens/Admin/admin.screen'
 import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 import settingApi from './services/setting.api'
 import ProjectScreen from './screens/Project/project.screen'
 import ProjectDetail from './components/Project/projectdetail.component'
 import SkillSection from './screens/Skills/skills.section'
-import ContactSection from './screens/Contact/contact.section'
+import ContactSection from './components/Contact/contact.section'
+import Footer from './components/Footer/footer.component'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -66,6 +67,7 @@ function App() {
                 <Project />
                 <SkillSection />
                 <ContactSection />
+                <Footer />
               </>
             }
           />

@@ -9,11 +9,11 @@ import {
   ProjectLine,
   ProjectListWrapper,
 } from './project.style'
-import ProjectCard from './ProjectCard'
+import ProjectCard from '../../components/Project/ProjectCard'
 import projectApi from '../../services/project.api'
 import { BASE_URL } from '../../services/api'
 import Menu from '../../components/Menu/menu.component'
-import { AboutMeText } from '../Aboutme/aboutme.style'
+import { AboutMeText } from '../../components/Aboutme/aboutme.style'
 
 const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
   const [majorProjects, setMajorProjects] = useState([])

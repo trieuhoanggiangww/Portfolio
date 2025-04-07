@@ -15,7 +15,7 @@ import {
   ProjectTitle,
   ProjectLine,
   ProjectHeaderLeft,
-} from '../Project/project.style'
+} from '../../screens/Project/project.style'
 import { FaEnvelope, FaPhoneAlt, FaFacebookF } from 'react-icons/fa'
 import { SiZalo } from 'react-icons/si'
 import settingApi from '../../services/setting.api'
@@ -46,9 +46,10 @@ const ContactSection = () => {
 
         <ContactContent>
           <ContactText>
-            Hiện tại mình đang tìm kiếm những cơ hội mới để cộng tác. Đừng ngần
-            ngại liên hệ nếu bạn muốn hợp tác, đặt câu hỏi, hoặc đơn giản chỉ để
-            trò chuyện!
+            Hiện tại mình đang tìm kiếm những cơ hội mới để cộng tác.
+            <br />
+            Đừng ngần ngại liên hệ nếu bạn muốn hợp tác, đặt câu hỏi, hoặc đơn
+            giản chỉ để trò chuyện!
           </ContactText>
 
           <ContactBox>
