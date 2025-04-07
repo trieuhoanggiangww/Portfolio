@@ -8,6 +8,6 @@ const authAdminMiddleware = require('../midleware/auth.middleware')
 const router = express.Router()
 
 router.post('/loginAdmin', loginAdminController)
-router.post('/createAdmin', createAdminController, authAdminMiddleware)
+router.post('/createAdmin', authAdminMiddleware, createAdminController)
 
 module.exports = router

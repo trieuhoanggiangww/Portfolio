@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
 
 import Menu from './components/Menu/menu.component'
 import SocialBar from './components/SocialBar/socialbar.component'
@@ -15,21 +20,20 @@ import SkillSection from './components/Skills/skills.section'
 import ContactSection from './components/Contact/contact.section'
 import Footer from './components/Footer/footer.component'
 import BackgroundAnimation from './components/Animation/animation.component'
+import LoginScreen from './screens/Login/login.screen'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  // Đọc trạng thái theme từ localStorage khi mở app
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'light') {
-      setIsDarkMode(false)
-    } else {
-      setIsDarkMode(true)
-    }
+    setIsDarkMode(savedTheme === 'light' ? false : true)
+
+    const token = localStorage.getItem('adminToken')
+    setIsAuthenticated(!!token)
   }, [])
 
-  // Toggle theme và lưu vào localStorage
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
       const newMode = !prev
@@ -38,10 +42,8 @@ function App() {
     })
   }
 
-  // Ghi lượt xem (chỉ ghi 1 lần mỗi 1 tiếng)
   useEffect(() => {
     const lastView = localStorage.getItem('lastViewed')
-
     if (!lastView || Date.now() - parseInt(lastView) > 3600 * 1000) {
       settingApi
         .increaseViews()
@@ -74,15 +76,34 @@ function App() {
             }
           />
 
-          {/* Trang admin */}
+          {/* Trang login admin */}
+          <Route
+            path="/admin/login"
+            element={<LoginScreen setIsAuthenticated={setIsAuthenticated} />}
+          />
+
+          {/* Auto redirect từ /admin về /admin/dashboard */}
+          <Route
+            path="/admin"
+            element={<Navigate to="/admin/dashboard" replace />}
+          />
+
+          {/* Trang dashboard admin - bảo vệ route */}
           <Route
             path="/admin/*"
             element={
-              <AdminScreen isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+              isAuthenticated ? (
+                <AdminScreen
+                  isDarkMode={isDarkMode}
+                  toggleTheme={toggleTheme}
+                />
+              ) : (
+                <Navigate to="/admin/login" replace />
+              )
             }
           />
 
-          {/* Trang project */}
+          {/* Trang projects */}
           <Route
             path="/projects"
             element={
@@ -92,7 +113,6 @@ function App() {
               />
             }
           />
-
           <Route
             path="/projects/:id"
             element={

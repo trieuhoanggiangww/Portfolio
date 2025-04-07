@@ -40,7 +40,7 @@ const ContactSection = () => {
       <ContactSectionContainer>
         <ProjectHeaderLeft>
           <ProjectHash>#</ProjectHash>
-          <ProjectTitle>contact</ProjectTitle>
+          <ProjectTitle>Contact</ProjectTitle>
           <ProjectLine />
         </ProjectHeaderLeft>
 

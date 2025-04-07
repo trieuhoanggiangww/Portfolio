@@ -23,12 +23,13 @@ import {
   FaSun,
   FaBars,
 } from 'react-icons/fa'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Sidebar = ({ toggleTheme, isDarkMode }) => {
   const [dark, setDark] = useState(isDarkMode)
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const getPageTitle = () => {
     if (location.pathname.includes('dashboard')) return 'Dashboard'
@@ -44,6 +45,11 @@ const Sidebar = ({ toggleTheme, isDarkMode }) => {
 
   const handleToggleSidebar = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken')
+    navigate('/admin/login')
   }
 
   return (
@@ -82,7 +88,11 @@ const Sidebar = ({ toggleTheme, isDarkMode }) => {
 
         {/* Dưới cùng */}
         <div style={{ marginTop: 'auto' }}>
-          <SidebarItemLink to="/admin/logout" onClick={handleToggleSidebar}>
+          <SidebarItemLink
+            as="div"
+            onClick={handleLogout}
+            style={{ cursor: 'pointer' }}
+          >
             <FaSignOutAlt style={{ marginRight: '10px' }} />
             Logout
           </SidebarItemLink>

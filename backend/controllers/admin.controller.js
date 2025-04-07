@@ -4,6 +4,7 @@ const { loginAdmin, createAdmin } = require('../services/admin.service')
 const loginAdminController = async (req, res) => {
   try {
     const { username, password } = req.body
+
     const { token } = await loginAdmin(username, password)
 
     res.status(200).json({
@@ -12,7 +13,8 @@ const loginAdminController = async (req, res) => {
       token,
     })
   } catch (error) {
-    console.error('Lỗi đăng nhập admin:', error.message)
+    console.error('Message:', error.message)
+
     res.status(401).json({
       success: false,
       message: error.message || 'Đăng nhập thất bại',
