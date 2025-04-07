@@ -58,7 +58,7 @@ const ProjectCard = ({
       rel="noopener noreferrer"
       style={buttons.length > 0 ? { marginLeft: 'auto' } : {}}
     >
-      Chi tiết →
+      Detail →
     </Button>
   )
 

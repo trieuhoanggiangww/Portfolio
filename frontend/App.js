@@ -11,6 +11,7 @@ import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 import settingApi from './services/setting.api'
 import ProjectScreen from './screens/Project/project.screen'
 import ProjectDetail from './components/Project/projectdetail.component'
+import SkillSection from './screens/Skills/skills.section'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -62,6 +63,7 @@ function App() {
                 <Menu toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
                 <AboutMe />
                 <Project />
+                <SkillSection />
               </>
             }
           />
