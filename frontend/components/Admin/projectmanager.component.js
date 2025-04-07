@@ -125,6 +125,11 @@ const ProjectManager = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!formData.image && !editingProject) {
+      alert('Vui lòng chọn ảnh minh họa!')
+      return
+    }
+
     const form = new FormData()
     const original = editingProject || {}
 
@@ -132,7 +137,6 @@ const ProjectManager = () => {
       if (key === 'image') return
       const newVal = typeof value === 'string' ? value.trim() : value
       const oldVal = original[key] ?? ''
-      // Cho phép gửi cả chuỗi rỗng nếu khác với dữ liệu cũ
       if (newVal !== oldVal) {
         form.append(key, newVal)
       }
@@ -142,15 +146,19 @@ const ProjectManager = () => {
       form.append('image', formData.image)
     }
 
-    if (editingProject) {
-      await projectApi.updateProject(editingProject._id, form)
-    } else {
-      await projectApi.createProject(form)
-    }
+    try {
+      if (editingProject) {
+        await projectApi.updateProject(editingProject._id, form)
+      } else {
+        await projectApi.createProject(form)
+      }
 
-    fetchProjects()
-    setIsAdding(false)
-    setEditingProject(null)
+      fetchProjects()
+      setIsAdding(false)
+      setEditingProject(null)
+    } catch (error) {
+      console.error('Lỗi submit project:', error)
+    }
   }
 
   const handleDelete = async (id) => {
