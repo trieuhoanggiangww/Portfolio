@@ -10,6 +10,7 @@ import AdminScreen from './screens/Admin/admin.screen'
 import { GlobalStyle, lightTheme, darkTheme } from './App.style'
 import settingApi from './services/setting.api'
 import ProjectScreen from './screens/Project/project.screen'
+import ProjectDetail from './components/Project/projectdetail.component'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -78,6 +79,16 @@ function App() {
             path="/projects"
             element={
               <ProjectScreen
+                toggleTheme={toggleTheme}
+                isDarkMode={isDarkMode}
+              />
+            }
+          />
+
+          <Route
+            path="/projects/:id"
+            element={
+              <ProjectDetail
                 toggleTheme={toggleTheme}
                 isDarkMode={isDarkMode}
               />
