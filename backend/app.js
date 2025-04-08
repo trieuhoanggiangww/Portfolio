@@ -23,14 +23,14 @@ app.use(
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Thiết lập các file tĩnh cho frontend
-app.use(express.static(path.join(__dirname, '../dist')))
+app.use(express.static(path.join(__dirname, '../build')))
 
 // Thiết lập các route cho API
 app.use('/api', projectRouter, adminRouter, settingRouter)
 
 // Route tất cả các yêu cầu khác tới index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist', 'index.html'))
+  res.sendFile(path.join(__dirname, '../build', 'index.html'))
 })
 
 module.exports = app
