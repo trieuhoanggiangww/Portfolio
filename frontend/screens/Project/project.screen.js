@@ -19,13 +19,35 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
   const [majorProjects, setMajorProjects] = useState([])
   const [minorProjects, setMinorProjects] = useState([])
 
+  const parseDateString = (dateStr) => {
+    if (!dateStr) return 0
+    const parts = dateStr.split(/[-/]/)
+    if (parts.length === 2) {
+      const [month, year] = parts[0].length === 4 ? [parts[1], parts[0]] : parts
+      return parseInt(year) * 100 + parseInt(month)
+    }
+    return 0
+  }
+
   const fetchProjects = async () => {
     try {
       const data = await projectApi.getAllProjects()
 
-      // Phân loại dự án
-      const major = data.filter((project) => project.projectType === 'major')
-      const minor = data.filter((project) => project.projectType === 'minor')
+      const major = data
+        .filter((project) => project.projectType === 'major')
+        .sort((a, b) => {
+          const aDate = parseDateString(a.endDate || a.startDate)
+          const bDate = parseDateString(b.endDate || b.startDate)
+          return bDate - aDate
+        })
+
+      const minor = data
+        .filter((project) => project.projectType === 'minor')
+        .sort((a, b) => {
+          const aDate = parseDateString(a.endDate || a.startDate)
+          const bDate = parseDateString(b.endDate || b.startDate)
+          return bDate - aDate
+        })
 
       setMajorProjects(major)
       setMinorProjects(minor)
@@ -56,7 +78,6 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
             </ProjectHeaderLeft>
           </ProjectHeader>
 
-          {/* ===== Phần dự án lớn ===== */}
           <ProjectHeader>
             <ProjectHeaderLeft>
               <ProjectHash>#</ProjectHash>
@@ -86,11 +107,10 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
             )}
           </ProjectListWrapper>
 
-          {/* ===== Phần dự án nhỏ ===== */}
           <ProjectHeader style={{ marginTop: '40px' }}>
             <ProjectHeaderLeft>
               <ProjectHash>#</ProjectHash>
-              <ProjectTitle>Small-pojects</ProjectTitle>
+              <ProjectTitle>Small-projects</ProjectTitle>
               <ProjectLine />
             </ProjectHeaderLeft>
           </ProjectHeader>
@@ -118,6 +138,7 @@ const ProjectScreen = ({ toggleTheme, isDarkMode }) => {
           </ProjectListWrapper>
         </ProjectSectionContainer>
       </ProjectSectionWrapper>
+
       <Footer />
     </>
   )
