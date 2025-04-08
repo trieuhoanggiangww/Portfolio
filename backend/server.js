@@ -11,7 +11,7 @@ mongoose
   .then(() => {
     console.log('Kết nối MongoDB thành công!')
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server chạy tại cổng ${PORT}`)
     })
   })

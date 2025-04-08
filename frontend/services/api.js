@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Định nghĩa URL cơ bản của server
-const API_URL = 'http://localhost:5000/api'
+const API_URL = 'http://trieuhoanggiang.click/api'
 
 // Tạo instance axios với cấu hình mặc định
 const api = axios.create({
@@ -9,6 +9,6 @@ const api = axios.create({
   withCredentials: true, // Nếu cần sử dụng cookie trong các request
 })
 
-export const BASE_URL = 'http://localhost:5000'
+export const BASE_URL = 'http://trieuhoanggiang.click'
 
 export default api
