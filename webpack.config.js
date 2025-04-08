@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const WebpackObfuscator = require('webpack-obfuscator')
+// const WebpackObfuscator = require('webpack-obfuscator'); // Tạm tắt
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -59,7 +59,7 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(), // Tự động xóa thư mục build cũ trước khi build mới
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './public/index.html',
         minify: isProduction
@@ -79,9 +79,7 @@ module.exports = (env, argv) => {
       }),
       ...(isProduction
         ? [
-            new WebpackObfuscator({ rotateStringArray: true }, [
-              'excluded_bundle.js',
-            ]),
+            // BỎ Obfuscator đi để code chạy ổn
             new MiniCssExtractPlugin({
               filename: 'styles/[name].[contenthash].css',
             }),
