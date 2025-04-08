@@ -19,14 +19,15 @@ app.use(
   })
 )
 
+app.use('/api', projectRouter)
+app.use('/api', settingRouter)
+app.use('/api', adminRouter)
+
 // Cho phép truy cập tĩnh thư mục uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Thiết lập các file tĩnh cho frontend
 app.use(express.static(path.join(__dirname, '../build')))
-
-// Thiết lập các route cho API
-app.use('/api', projectRouter, adminRouter, settingRouter)
 
 // Route tất cả các yêu cầu khác tới index.html
 app.get('*', (req, res) => {
