@@ -62,6 +62,7 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './public/index.html',
+        favicon: './public/favicon.ico',
         minify: isProduction
           ? {
               removeComments: true,
